@@ -309,4 +309,9 @@ function createBackToTop() {
 }
 
 // Initialize back to top button
-createBackToTop(); 
+createBackToTop();
+
+// Add touch support for mobile devices
+document.addEventListener('touchstart', function() {}, {passive: true});
+document.addEventListener('touchmove', function() {}, {passive: true});
+document.addEventListener('touchend', function() {}, {passive: true}); 

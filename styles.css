@@ -139,9 +139,12 @@ body {
 /* Service Selection */
 .service-selection {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .service-card {
@@ -149,12 +152,16 @@ body {
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2.5rem 2rem;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .service-card:hover {
@@ -208,27 +215,28 @@ body {
     color: #e8f4fd;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    flex-grow: 1;
 }
 
-.service-card ul {
-    list-style: none;
-    text-align: left;
+.service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 2rem;
 }
 
-.service-card li {
-    padding: 0.5rem 0;
+.feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
     color: #d1ecf1;
-    position: relative;
-    padding-left: 1.5rem;
+    transition: all 0.3s ease;
 }
 
-.service-card li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #3498db;
-    font-weight: bold;
+.service-card:hover .feature {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
 }
 
 .service-arrow {
@@ -689,6 +697,13 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .service-selection {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -722,6 +737,12 @@ body {
     .service-selection {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        max-width: 400px;
+    }
+
+    .service-card {
+        min-height: 350px;
+        padding: 2rem 1.5rem;
     }
 
     .about-content {
@@ -768,6 +789,22 @@ body {
 
     .service-card {
         padding: 1.5rem;
+        min-height: 300px;
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .feature {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
     }
 }
 

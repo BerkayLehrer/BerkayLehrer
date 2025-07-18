@@ -82,7 +82,7 @@ git push -u origin main
 2. Domain adınızı girin (örn: berkaykan.com)
 3. "Save" butonuna tıklayın
 
-## 📧 İletişim Bilgileri
+## �� İletişim Bilgileri
 
 - **E-posta**: info@berkaykan.com
 - **Telefon**: +90 XXX XXX XX XX
@@ -166,9 +166,9 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 
 Herhangi bir sorunuz için:
 - E-posta: info@berkaykan.com
-- GitHub Issues: [Repository Issues](https://github.com/BerkayLehrer/berkay-kan-website/issues)
+- GitHub Issues: [Repository Issues](https://github.com/BerkayLehrer/BerkayLehrer/issues)
 
 ---
 
 **Berkay Kan** - Avukat & Eğitim Danışmanı  
-*Hukuki danışmanlık ve Almanya eğitim danışmanlığı konularında uzman* 
+*Hukuki danışmanlık ve Almanya eğitim danışmanlığı konularında uzman*

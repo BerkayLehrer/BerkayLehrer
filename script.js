@@ -19,6 +19,7 @@ function initializeApp() {
     setupServiceCardEffects();
     setupSocialMediaEffects();
     setupPerformanceOptimizations();
+    setupInstagramFeed();
 }
 
 // Mobile Navigation
@@ -591,6 +592,146 @@ function showNotification(message, type = 'info') {
             document.body.removeChild(notification);
         }, 300);
     }, 5000);
+}
+
+// Instagram Feed Setup
+function setupInstagramFeed() {
+    const instagramFeed = document.getElementById('instagramFeed');
+    if (!instagramFeed) return;
+    
+    // Instagram API'si için proxy kullanımı (CORS sorununu çözmek için)
+    loadInstagramPosts();
+}
+
+async function loadInstagramPosts() {
+    const instagramFeed = document.getElementById('instagramFeed');
+    const username = 'berkaylehrer';
+    
+    try {
+        // Instagram Basic Display API veya alternatif çözüm
+        // Bu örnekte mock data kullanıyoruz, gerçek API için Instagram Developer hesabı gerekli
+        const posts = await getMockInstagramPosts();
+        displayInstagramPosts(posts);
+    } catch (error) {
+        console.error('Instagram posts yüklenirken hata:', error);
+        showInstagramError();
+    }
+}
+
+async function getMockInstagramPosts() {
+    // Mock Instagram posts - gerçek API için değiştirilecek
+    return [
+        {
+            id: 1,
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+            caption: 'Almanya\'da eğitim fırsatları hakkında bilgi almak isteyenler için özel danışmanlık hizmeti veriyorum. 🇩🇪 #AlmanyaEğitimi #EğitimDanışmanlığı',
+            likes: 45,
+            comments: 12,
+            timestamp: '2 saat önce'
+        },
+        {
+            id: 2,
+            image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop',
+            caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
+            likes: 38,
+            comments: 8,
+            timestamp: '1 gün önce'
+        },
+        {
+            id: 3,
+            image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=400&fit=crop',
+            caption: 'Almanca dersleri ile dil becerilerinizi geliştirin. Birebir ve grup dersleri mevcuttur. 📚 #AlmancaDersleri #DilEğitimi',
+            likes: 52,
+            comments: 15,
+            timestamp: '2 gün önce'
+        },
+        {
+            id: 4,
+            image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop',
+            caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri',
+            likes: 67,
+            comments: 23,
+            timestamp: '3 gün önce'
+        },
+        {
+            id: 5,
+            image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop',
+            caption: 'Vize süreçlerinde uzman danışmanlık. Almanya\'ya gitmek isteyenler için kapsamlı rehberlik hizmeti. 🛂 #VizeDanışmanlığı',
+            likes: 41,
+            comments: 11,
+            timestamp: '4 gün önce'
+        }
+    ];
+}
+
+function displayInstagramPosts(posts) {
+    const instagramFeed = document.getElementById('instagramFeed');
+    if (!instagramFeed) return;
+    
+    instagramFeed.innerHTML = '';
+    
+    posts.forEach(post => {
+        const postElement = createInstagramPost(post);
+        instagramFeed.appendChild(postElement);
+    });
+}
+
+function createInstagramPost(post) {
+    const postDiv = document.createElement('div');
+    postDiv.className = 'instagram-post';
+    postDiv.innerHTML = `
+        <div class="instagram-post-image">
+            <img src="${post.image}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="instagram-post-content">
+            <div class="instagram-post-header">
+                <div class="instagram-post-avatar">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="instagram-post-info">
+                    <h4>@berkaylehrer</h4>
+                    <span>${post.timestamp}</span>
+                </div>
+            </div>
+            <div class="instagram-post-caption">
+                ${post.caption}
+            </div>
+            <div class="instagram-post-stats">
+                <div class="instagram-post-stat">
+                    <i class="fas fa-heart"></i>
+                    <span>${post.likes}</span>
+                </div>
+                <div class="instagram-post-stat">
+                    <i class="fas fa-comment"></i>
+                    <span>${post.comments}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Post'a tıklama efekti
+    postDiv.addEventListener('click', () => {
+        window.open(`https://instagram.com/berkaylehrer`, '_blank');
+    });
+    
+    return postDiv;
+}
+
+function showInstagramError() {
+    const instagramFeed = document.getElementById('instagramFeed');
+    if (!instagramFeed) return;
+    
+    instagramFeed.innerHTML = `
+        <div class="instagram-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Instagram gönderileri yüklenemedi</h3>
+            <p>Lütfen daha sonra tekrar deneyin veya Instagram profilinizi ziyaret edin.</p>
+            <a href="https://instagram.com/berkaylehrer" target="_blank" class="btn btn-primary">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram'a Git</span>
+            </a>
+        </div>
+    `;
 }
 
 // Add CSS for form validation

@@ -3,24 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berkay Kan - Hizmet Seçimi</title>
+    <meta name="description" content="Berkay Kan - Hukuki Danışmanlık, Almanya Eğitim Danışmanlığı ve Almanca Dersleri. Uzman hizmetler için bize ulaşın.">
+    <meta name="keywords" content="hukuki danışmanlık, almanya eğitim, almanca dersleri, berkay kan">
+    <meta name="author" content="Berkay Kan">
+    <title>Berkay Kan - Hukuki Danışmanlık & Eğitim Danışmanı</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./images/berkay-banner.jpg" as="image">
+    <link rel="preload" href="./images/berkay-presentation.jpg" as="image">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Berkay Kan</h3>
+            <p>Yükleniyor...</p>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>Berkay Kan</h2>
+                <h2 class="gradient-text">Berkay Kan</h2>
             </div>
-            <div class="nav-menu">
-                <a href="#home" class="nav-link">Ana Sayfa</a>
-                <a href="#about" class="nav-link">Hakkımda</a>
-                <a href="#contact" class="nav-link">İletişim</a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Ana Sayfa</span>
+                </a>
+                <a href="#about" class="nav-link" data-section="about">
+                    <i class="fas fa-user"></i>
+                    <span>Hakkımda</span>
+                </a>
+                <a href="#services" class="nav-link" data-section="services">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Hizmetler</span>
+                </a>
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>İletişim</span>
+                </a>
             </div>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -30,26 +64,50 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-image">
-                    <img src="./images/berkay-banner.jpg" alt="Berkay Kan - Almanca Öğretmeni" class="hero-banner" onerror="this.style.display='none'">
+                    <img src="./images/berkay-banner.jpg" alt="Berkay Kan - Profesyonel Hizmetler" class="hero-banner" loading="lazy">
+                    <div class="hero-image-overlay">
+                        <div class="hero-badge">
+                            <i class="fas fa-star"></i>
+                            <span>Uzman Hizmet</span>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="hero-title">Berkay Kan</h1>
+                <h1 class="hero-title" id="heroTitle">Berkay Kan</h1>
                 <h2 class="hero-subtitle">Hangi Hizmete İhtiyacınız Var?</h2>
                 <p class="hero-description">
-                    Uzmanlık alanlarımızdan birini seçin ve size nasıl yardımcı olabileceğimi öğrenin
+                    Uzmanlık alanlarımızdan birini seçin ve size nasıl yardımcı olabileceğimi öğrenin. 
+                    Her hizmet özel olarak tasarlanmış ve müşteri memnuniyeti odaklıdır.
                 </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Yıl Deneyim</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Başarılı Vaka</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Mutlu Müşteri</span>
+                    </div>
+                </div>
             </div>
             
             <!-- Service Selection Cards -->
-            <div class="service-selection">
-                <div class="service-card" onclick="window.location.href='hukuk.html'">
+            <div class="service-selection" id="services">
+                <div class="service-card" onclick="navigateToService('hukuk.html')" data-service="hukuk">
                     <div class="service-icon">
                         <i class="fas fa-gavel"></i>
                     </div>
                     <h3>Hukuki Danışmanlık</h3>
-                    <p>Hukuki konularda uzman danışmanlık hizmeti</p>
+                    <p>Hukuki konularda uzman danışmanlık hizmeti. Haklarınızı korumak için profesyonel çözümler.</p>
                     <div class="service-features">
                         <span class="feature">Hukuki Görüşme</span>
                         <span class="feature">Dava Takibi</span>
@@ -58,14 +116,15 @@
                     <div class="service-arrow">
                         <i class="fas fa-arrow-right"></i>
                     </div>
+                    <div class="service-hover-effect"></div>
                 </div>
 
-                <div class="service-card" onclick="window.location.href='egitim.html'">
+                <div class="service-card" onclick="navigateToService('egitim.html')" data-service="egitim">
                     <div class="service-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Almanya Eğitim Danışmanlığı</h3>
-                    <p>Almanya'da eğitim almak isteyenler için kapsamlı danışmanlık</p>
+                    <p>Almanya'da eğitim almak isteyenler için kapsamlı danışmanlık ve rehberlik hizmeti.</p>
                     <div class="service-features">
                         <span class="feature">Üniversite Seçimi</span>
                         <span class="feature">Başvuru Süreci</span>
@@ -74,14 +133,15 @@
                     <div class="service-arrow">
                         <i class="fas fa-arrow-right"></i>
                     </div>
+                    <div class="service-hover-effect"></div>
                 </div>
 
-                <div class="service-card" onclick="window.location.href='danismanlik.html'">
+                <div class="service-card" onclick="navigateToService('danismanlik.html')" data-service="danismanlik">
                     <div class="service-icon">
                         <i class="fas fa-language"></i>
                     </div>
                     <h3>Almanca Dersleri</h3>
-                    <p>Almanca öğrenmek isteyenler için özel dersler</p>
+                    <p>Almanca öğrenmek isteyenler için özel dersler. Birebir ve grup dersleri ile hızlı öğrenme.</p>
                     <div class="service-features">
                         <span class="feature">Birebir Dersler</span>
                         <span class="feature">Grup Dersleri</span>
@@ -90,8 +150,17 @@
                     <div class="service-arrow">
                         <i class="fas fa-arrow-right"></i>
                     </div>
+                    <div class="service-hover-effect"></div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <span>Daha fazlası için kaydırın</span>
         </div>
     </section>
 
@@ -102,36 +171,51 @@
             <div class="about-content">
                 <div class="about-text">
                     <div class="about-image">
-                        <img src="./images/berkay-presentation.jpg" alt="Berkay Kan Sunum Yapıyor" class="about-photo" onerror="this.style.display='none'">
+                        <img src="./images/berkay-presentation.jpg" alt="Berkay Kan Sunum Yapıyor" class="about-photo" loading="lazy">
+                        <div class="about-image-badge">
+                            <i class="fas fa-award"></i>
+                            <span>Uzman</span>
+                        </div>
                     </div>
-                    <p>
-                        Merhaba, ben Berkay Kan. Hem hukuki danışmanlık hem de Almanya eğitim danışmanlığı 
-                        alanlarında hizmet vermekteyim. Uzun yıllardır edindiğim deneyimlerle, 
-                        müvekkillerimin ihtiyaçlarına en uygun çözümleri sunmaya odaklanıyorum.
-                    </p>
-                    <p>
-                        Almanya'da eğitim almak isteyen öğrencilere rehberlik ediyor, 
-                        hukuki süreçlerde danışmanlık hizmeti veriyorum. 
-                        Her iki alanda da güncel gelişmeleri takip ederek, 
-                        en doğru ve güncel bilgileri paylaşıyorum.
-                    </p>
-                    <div class="about-quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Hast du schön Deutsch gelernt?"</p>
-                        <span>- Berkay Kan</span>
+                    <div class="about-text-content">
+                        <p>
+                            Merhaba, ben Berkay Kan. Hem hukuki danışmanlık hem de Almanya eğitim danışmanlığı 
+                            alanlarında hizmet vermekteyim. Uzun yıllardır edindiğim deneyimlerle, 
+                            müvekkillerimin ihtiyaçlarına en uygun çözümleri sunmaya odaklanıyorum.
+                        </p>
+                        <p>
+                            Almanya'da eğitim almak isteyen öğrencilere rehberlik ediyor, 
+                            hukuki süreçlerde danışmanlık hizmeti veriyorum. 
+                            Her iki alanda da güncel gelişmeleri takip ederek, 
+                            en doğru ve güncel bilgileri paylaşıyorum.
+                        </p>
+                        <div class="about-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"Hast du schön Deutsch gelernt?"</p>
+                            <span>- Berkay Kan</span>
+                        </div>
                     </div>
                 </div>
                 <div class="about-stats">
-                    <div class="stat">
-                        <h3>5+</h3>
+                    <div class="stat" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="stat-number" data-target="5">0</h3>
                         <p>Yıl Deneyim</p>
                     </div>
-                    <div class="stat">
-                        <h3>100+</h3>
+                    <div class="stat" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="stat-number" data-target="100">0</h3>
                         <p>Başarılı Vaka</p>
                     </div>
-                    <div class="stat">
-                        <h3>50+</h3>
+                    <div class="stat" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="stat-number" data-target="50">0</h3>
                         <p>Eğitim Danışmanlığı</p>
                     </div>
                 </div>
@@ -146,49 +230,78 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>İletişim Bilgileri</h3>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>E-posta</h4>
                             <p>info@berkaykan.com</p>
                         </div>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="200">
                         <i class="fas fa-phone"></i>
                         <div>
                             <h4>Telefon</h4>
                             <p>+90 XXX XXX XX XX</p>
                         </div>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" data-aos="fade-right" data-aos-delay="300">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Adres</h4>
                             <p>İstanbul, Türkiye</p>
                         </div>
                     </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <div class="social-links" data-aos="fade-right" data-aos-delay="400">
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="contact-form">
                     <h3>Mesaj Gönder</h3>
-                    <form>
+                    <form id="contactForm" novalidate>
                         <div class="form-group">
-                            <input type="text" placeholder="Adınız" required>
+                            <label for="name">Adınız *</label>
+                            <input type="text" id="name" name="name" placeholder="Adınız" required>
+                            <div class="field-error"></div>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="E-posta" required>
+                            <label for="email">E-posta *</label>
+                            <input type="email" id="email" name="email" placeholder="E-posta" required>
+                            <div class="field-error"></div>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Konu" required>
+                            <label for="subject">Konu *</label>
+                            <input type="text" id="subject" name="subject" placeholder="Konu" required>
+                            <div class="field-error"></div>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Mesajınız" rows="5" required></textarea>
+                            <label for="service">Hizmet Türü</label>
+                            <select id="service" name="service">
+                                <option value="">Hizmet seçiniz</option>
+                                <option value="hukuk">Hukuki Danışmanlık</option>
+                                <option value="egitim">Eğitim Danışmanlığı</option>
+                                <option value="almanca">Almanca Dersleri</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Gönder</button>
+                        <div class="form-group">
+                            <label for="message">Mesajınız *</label>
+                            <textarea id="message" name="message" placeholder="Mesajınız" rows="5" required></textarea>
+                            <div class="field-error"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Gönder</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -200,8 +313,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Berkay Kan</h3>
+                    <h3 class="gradient-text">Berkay Kan</h3>
                     <p>Avukat & Eğitim Danışmanı</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>Hizmetler</h4>
@@ -212,17 +330,74 @@
                     </ul>
                 </div>
                 <div class="footer-section">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="#about">Hakkımda</a></li>
+                        <li><a href="#services">Hizmetler</a></li>
+                        <li><a href="#contact">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
                     <h4>İletişim</h4>
-                    <p>info@berkaykan.com</p>
-                    <p>+90 XXX XXX XX XX</p>
+                    <p><i class="fas fa-envelope"></i> info@berkaykan.com</p>
+                    <p><i class="fas fa-phone"></i> +90 XXX XXX XX XX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Berkay Kan. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">Kullanım Şartları</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    
+    <!-- Service Navigation Function -->
+    <script>
+        function navigateToService(url) {
+            // Add loading animation
+            document.body.style.cursor = 'wait';
+            
+            // Add transition effect
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(37, 99, 235, 0.9);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+                font-weight: 600;
+            `;
+            overlay.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yönlendiriliyor...';
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1000);
+        }
+        
+        // Remove loading screen when page is loaded
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        });
+    </script>
 </body>
 </html> 

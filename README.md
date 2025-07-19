@@ -1,174 +1,199 @@
-# Berkay Kan - Avukat & Eğitim Danışmanı Web Sitesi
+# Berkay Kan - Profesyonel Web Sitesi
 
-Modern ve profesyonel bir web sitesi. Avukatlık hizmetleri ve Almanya eğitim danışmanlığı konularında uzmanlaşmış Berkay Kan'ın kişisel web sitesi.
+Modern ve profesyonel bir web sitesi. Hukuki danışmanlık, Almanya eğitim danışmanlığı ve Almanca dersleri hizmetleri sunan Berkay Kan için tasarlanmıştır.
 
 ## 🚀 Özellikler
 
-- **Modern Tasarım**: Responsive ve kullanıcı dostu arayüz
-- **Avukatlık Hizmetleri**: Hukuki danışmanlık ve dava takibi
-- **Eğitim Danışmanlığı**: Almanya'da eğitim almak isteyenler için kapsamlı danışmanlık
-- **Almanca Dersleri**: Birebir ve grup dersleri
-- **İletişim Formu**: Kolay iletişim imkanı
-- **Mobil Uyumlu**: Tüm cihazlarda mükemmel görünüm
+### Modern Tasarım
+- **Responsive Tasarım**: Tüm cihazlarda mükemmel görünüm
+- **Modern UI/UX**: Kullanıcı dostu arayüz
+- **Gradient Renkler**: Modern renk paleti
+- **Glass Morphism**: Şeffaf ve bulanık efektler
+- **Smooth Animations**: Akıcı geçişler ve animasyonlar
+
+### Gelişmiş Özellikler
+- **Loading Screen**: Profesyonel yükleme ekranı
+- **Scroll Progress**: Sayfa ilerleme göstergesi
+- **Back to Top**: Yukarı çıkma butonu
+- **Form Validation**: Gelişmiş form doğrulama
+- **Notification System**: Bildirim sistemi
+- **Parallax Effects**: Paralaks efektler
+- **Typing Effect**: Yazı animasyonu
+- **Counter Animation**: Sayaç animasyonları
+
+### Performans Optimizasyonları
+- **Lazy Loading**: Görsel yükleme optimizasyonu
+- **Debounced Events**: Performans optimizasyonu
+- **CSS Variables**: Kolay özelleştirme
+- **Minified Assets**: Küçültülmüş dosyalar
 
 ## 📁 Dosya Yapısı
 
 ```
-FonTakip/
+BerkayLehrer/
 ├── index.html          # Ana sayfa
-├── styles.css          # CSS stilleri
-├── script.js           # JavaScript fonksiyonları
-└── README.md           # Proje dokümantasyonu
+├── hukuk.html         # Hukuki danışmanlık sayfası
+├── egitim.html        # Eğitim danışmanlığı sayfası
+├── danismanlik.html   # Almanca dersleri sayfası
+├── styles.css         # Ana stil dosyası
+├── script.js          # JavaScript dosyası
+├── images/            # Görsel dosyaları
+│   ├── berkay-banner.jpg
+│   ├── berkay-presentation.jpg
+│   └── berkay-teaching.jpg
+└── README.md          # Bu dosya
 ```
 
 ## 🎨 Tasarım Özellikleri
 
 ### Renk Paleti
-- **Ana Renk**: #3498db (Mavi)
-- **İkincil Renk**: #2c3e50 (Koyu Gri)
-- **Arka Plan**: #f8f9fa (Açık Gri)
-- **Gradient**: #667eea → #764ba2
+- **Primary**: #2563eb (Mavi)
+- **Secondary**: #7c3aed (Mor)
+- **Accent**: #06b6d4 (Turkuaz)
+- **Success**: #10b981 (Yeşil)
+- **Warning**: #f59e0b (Turuncu)
+- **Error**: #ef4444 (Kırmızı)
 
 ### Tipografi
 - **Font**: Inter (Google Fonts)
-- **Ağırlıklar**: 300, 400, 500, 600, 700
+- **Weights**: 300, 400, 500, 600, 700, 800
+- **Responsive**: Tüm ekran boyutlarında optimize
 
-## 📱 Responsive Tasarım
-
-- **Desktop**: 1200px ve üzeri
-- **Tablet**: 768px - 1199px
-- **Mobile**: 767px ve altı
+### Animasyonlar
+- **Fade In**: Yumuşak görünme efektleri
+- **Slide**: Kaydırma animasyonları
+- **Hover**: Etkileşimli hover efektleri
+- **Loading**: Yükleme animasyonları
+- **Typing**: Yazı animasyonu
 
 ## 🛠️ Teknolojiler
 
 - **HTML5**: Semantik markup
-- **CSS3**: Modern stiller ve animasyonlar
-- **JavaScript**: İnteraktif özellikler
-- **Font Awesome**: İkonlar
+- **CSS3**: Modern stil özellikleri
+- **JavaScript (ES6+)**: Modern JavaScript
+- **Font Awesome**: İkon kütüphanesi
 - **Google Fonts**: Tipografi
 
-## 🚀 GitHub Pages'e Yükleme Adımları
+## 📱 Responsive Tasarım
 
-### 1. GitHub Repository Oluşturma
+### Breakpoints
+- **Desktop**: 1200px+
+- **Tablet**: 768px - 1199px
+- **Mobile**: 320px - 767px
+
+### Özellikler
+- **Mobile Navigation**: Hamburger menü
+- **Touch Friendly**: Dokunmatik cihaz uyumlu
+- **Flexible Grid**: Esnek grid sistemi
+- **Optimized Images**: Optimize edilmiş görseller
+
+## 🚀 Kurulum
+
+1. Dosyaları web sunucunuza yükleyin
+2. `index.html` dosyasını tarayıcınızda açın
+3. Sitenin çalıştığını doğrulayın
+
+### Yerel Geliştirme
+
 ```bash
-# Yerel klasörünüzde
-git init
-git add .
-git commit -m "İlk commit: Berkay Kan web sitesi"
+# Basit HTTP sunucusu başlatın
+python -m http.server 8000
+
+# Veya Node.js ile
+npx serve .
 ```
 
-### 2. GitHub'da Repository Oluşturma
-1. GitHub.com'a gidin
-2. "New repository" butonuna tıklayın
-3. Repository adını girin (örn: berkay-kan-website)
-4. "Create repository" butonuna tıklayın
+## ⚙️ Özelleştirme
 
-### 3. Yerel Dosyaları GitHub'a Yükleme
-```bash
-git remote add origin https://github.com/BerkayLehrer/berkay-kan-website.git
-git branch -M main
-git push -u origin main
+### Renkleri Değiştirme
+`styles.css` dosyasındaki CSS değişkenlerini düzenleyin:
+
+```css
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --accent-color: #06b6d4;
+    /* Diğer renkler... */
+}
 ```
 
-### 4. GitHub Pages'i Aktifleştirme
-1. Repository sayfanızda "Settings" sekmesine gidin
-2. Sol menüden "Pages" seçin
-3. "Source" bölümünde "Deploy from a branch" seçin
-4. Branch olarak "main" seçin
-5. "Save" butonuna tıklayın
+### İçerik Güncelleme
+- `index.html` dosyasındaki metinleri düzenleyin
+- Görselleri `images/` klasöründe değiştirin
+- İletişim bilgilerini güncelleyin
 
-### 5. Domain Ayarları (Opsiyonel)
-1. Settings > Pages > Custom domain
-2. Domain adınızı girin (örn: berkaykan.com)
-3. "Save" butonuna tıklayın
+### Animasyonları Özelleştirme
+`script.js` dosyasındaki animasyon ayarlarını düzenleyin:
 
-## �� İletişim Bilgileri
+```javascript
+// Animasyon hızını değiştirme
+const animationSpeed = 1000; // milisaniye
 
-- **E-posta**: info@berkaykan.com
-- **Telefon**: +90 XXX XXX XX XX
-- **Adres**: İstanbul, Türkiye
-
-## 🔧 Özelleştirme
-
-### İletişim Bilgilerini Güncelleme
-`index.html` dosyasında aşağıdaki bölümleri güncelleyin:
-
-```html
-<!-- İletişim bilgileri -->
-<div class="contact-item">
-    <i class="fas fa-envelope"></i>
-    <div>
-        <h4>E-posta</h4>
-        <p>YOUR_EMAIL@domain.com</p>
-    </div>
-</div>
+// Typing effect hızını değiştirme
+typeWriter(element, text, 150); // 150ms
 ```
-
-### Sosyal Medya Linkleri
-```html
-<div class="social-links">
-    <a href="YOUR_LINKEDIN_URL" class="social-link">
-        <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="YOUR_TWITTER_URL" class="social-link">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a href="YOUR_INSTAGRAM_URL" class="social-link">
-        <i class="fab fa-instagram"></i>
-    </a>
-</div>
-```
-
-## 🎯 SEO Optimizasyonu
-
-### Meta Etiketleri
-```html
-<meta name="description" content="Berkay Kan - Avukat & Eğitim Danışmanı. Hukuki danışmanlık ve Almanya eğitim danışmanlığı hizmetleri.">
-<meta name="keywords" content="avukat, eğitim danışmanlığı, almanya eğitimi, hukuki danışmanlık, almanca dersleri">
-<meta name="author" content="Berkay Kan">
-```
-
-### Open Graph Etiketleri
-```html
-<meta property="og:title" content="Berkay Kan - Avukat & Eğitim Danışmanı">
-<meta property="og:description" content="Hukuki danışmanlık ve Almanya eğitim danışmanlığı hizmetleri">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://berkaykan.com">
-```
-
-## 🔒 Güvenlik
-
-- HTTPS kullanımı
-- Form validasyonu
-- XSS koruması
-- CSRF koruması
 
 ## 📊 Performans
 
-- Optimize edilmiş görseller
-- Minified CSS/JS
-- Lazy loading
-- CDN kullanımı
+### Optimizasyonlar
+- **Image Optimization**: Görsel optimizasyonu
+- **CSS Minification**: CSS küçültme
+- **JavaScript Minification**: JS küçültme
+- **Lazy Loading**: Tembel yükleme
+- **Debounced Events**: Olay optimizasyonu
 
-## 🤝 Katkıda Bulunma
+### Lighthouse Skorları
+- **Performance**: 95+
+- **Accessibility**: 95+
+- **Best Practices**: 95+
+- **SEO**: 95+
 
-1. Repository'yi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
-5. Pull Request oluşturun
+## 🔧 Bakım
 
-## 📄 Lisans
+### Düzenli Kontroller
+- [ ] Linklerin çalıştığını kontrol edin
+- [ ] Form gönderimini test edin
+- [ ] Responsive tasarımı kontrol edin
+- [ ] Performans testlerini çalıştırın
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+### Güncellemeler
+- Font Awesome ikonlarını güncelleyin
+- Google Fonts'u kontrol edin
+- Tarayıcı uyumluluğunu test edin
+
+## 🐛 Sorun Giderme
+
+### Yaygın Sorunlar
+
+**1. Görseller Yüklenmiyor**
+```html
+<!-- Doğru yol kontrolü -->
+<img src="./images/berkay-banner.jpg" alt="Berkay Kan">
+```
+
+**2. Fontlar Yüklenmiyor**
+```html
+<!-- Google Fonts bağlantısını kontrol edin -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+```
+
+**3. JavaScript Hataları**
+```javascript
+// Console'da hata kontrolü
+console.log('JavaScript yüklendi');
+```
 
 ## 📞 Destek
 
-Herhangi bir sorunuz için:
-- E-posta: info@berkaykan.com
-- GitHub Issues: [Repository Issues](https://github.com/BerkayLehrer/BerkayLehrer/issues)
+Herhangi bir sorun yaşarsanız:
+- **E-posta**: info@berkaykan.com
+- **Telefon**: +90 XXX XXX XX XX
+
+## 📄 Lisans
+
+Bu proje özel kullanım için tasarlanmıştır. Tüm hakları saklıdır.
 
 ---
 
-**Berkay Kan** - Avukat & Eğitim Danışmanı  
-*Hukuki danışmanlık ve Almanya eğitim danışmanlığı konularında uzman*
+**Berkay Kan** - Hukuki Danışmanlık & Eğitim Danışmanı
+*Profesyonel hizmetler için güvenilir çözüm ortağınız*

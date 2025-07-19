@@ -723,7 +723,7 @@ async function getInstagramPostsRapidAPI(username) {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'a63a3b86acmshb7f5b2bd650c078p16d475jsn6e91e8a967df', // Buraya RapidAPI key'inizi ekleyin
+                'X-RapidAPI-Key': 'a63a3b86acmshb7f5b2bd650c078p16d475jsn6e91e8a967df',
                 'X-RapidAPI-Host': 'instagram-bulk-profile-scrapper.p.rapidapi.com'
             }
         };
@@ -738,12 +738,21 @@ async function getInstagramPostsRapidAPI(username) {
         
         if (data && data.response && data.response.posts) {
             return data.response.posts.slice(0, 5).map(post => ({
-                id: post.id,
-                image: post.display_url,
+                id: post.id || Math.random().toString(),
+                image: post.display_url || post.image_url,
                 caption: post.caption || 'Instagram gönderisi',
                 likes: post.likes || 0,
                 comments: post.comments || 0,
-                timestamp: formatTimestamp(post.timestamp)
+                timestamp: formatTimestamp(post.timestamp || Date.now() / 1000)
+            }));
+        } else if (data && data.posts) {
+            return data.posts.slice(0, 5).map(post => ({
+                id: post.id || Math.random().toString(),
+                image: post.image_url || post.display_url,
+                caption: post.caption || 'Instagram gönderisi',
+                likes: post.likes || 0,
+                comments: post.comments || 0,
+                timestamp: formatTimestamp(post.timestamp || Date.now() / 1000)
             }));
         } else {
             throw new Error('Instagram verisi bulunamadı');

@@ -100,6 +100,8 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding-top: 80px;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-container {
@@ -107,6 +109,30 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    margin-bottom: 3rem;
+}
+
+.hero-image {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-banner {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.hero-banner:hover {
+    transform: scale(1.05);
 }
 
 .hero-title {
@@ -327,7 +353,30 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: start;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-image {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.about-photo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.about-photo:hover {
+    transform: scale(1.02);
 }
 
 .about-text p {
@@ -335,6 +384,35 @@ body {
     margin-bottom: 1.5rem;
     color: #555;
     line-height: 1.8;
+}
+
+.about-quote {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.about-quote i {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.about-quote p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.about-quote span {
+    font-size: 1rem;
+    opacity: 0.8;
 }
 
 .about-stats {
@@ -702,6 +780,11 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -743,11 +826,6 @@ body {
     .service-card {
         min-height: 350px;
         padding: 2rem 1.5rem;
-    }
-
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
     }
 
     .about-stats {
@@ -805,6 +883,14 @@ body {
     .feature {
         font-size: 0.8rem;
         padding: 0.4rem 0.8rem;
+    }
+    
+    .about-quote {
+        padding: 1.5rem;
+    }
+    
+    .about-quote p {
+        font-size: 1.1rem;
     }
 }
 

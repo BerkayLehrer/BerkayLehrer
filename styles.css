@@ -245,6 +245,9 @@ html {
     box-shadow: var(--shadow-xl);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     filter: brightness(1.1) contrast(1.1);
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-banner:hover {
@@ -254,6 +257,11 @@ html {
 
 .hero-banner:not([src]), .hero-banner[src=""] {
     display: none;
+}
+
+.hero-banner {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-title {
@@ -558,6 +566,9 @@ html {
     border-radius: 16px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     filter: brightness(1.05) contrast(1.05);
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .about-photo:hover {
@@ -567,6 +578,11 @@ html {
 
 .about-photo:not([src]), .about-photo[src=""] {
     display: none;
+}
+
+.about-photo {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .about-text p {
@@ -1659,13 +1675,14 @@ html {
 /* Loading Animation for Images */
 .hero-banner,
 .about-photo {
-    opacity: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
     transition: opacity 0.5s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-banner.loaded,
 .about-photo.loaded {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 /* Enhanced Typography */

@@ -335,6 +335,15 @@ function setupLoadingAnimations() {
                 el.style.transform = 'translateY(0)';
             }, index * 200);
         });
+        
+        // Force show images
+        const images = document.querySelectorAll('.hero-banner, .about-photo');
+        images.forEach(img => {
+            img.style.opacity = '1';
+            img.style.visibility = 'visible';
+            img.style.display = 'block';
+            img.classList.add('loaded');
+        });
     });
 }
 

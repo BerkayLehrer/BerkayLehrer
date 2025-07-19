@@ -121,6 +121,10 @@ body {
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;
+    min-height: 200px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 20px;
+    align-items: center;
 }
 
 .hero-banner {
@@ -133,6 +137,10 @@ body {
 
 .hero-banner:hover {
     transform: scale(1.05);
+}
+
+.hero-banner:not([src]), .hero-banner[src=""] {
+    display: none;
 }
 
 .hero-title {
@@ -365,6 +373,12 @@ body {
 .about-image {
     margin-bottom: 2rem;
     text-align: center;
+    min-height: 300px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-photo {
@@ -377,6 +391,10 @@ body {
 
 .about-photo:hover {
     transform: scale(1.02);
+}
+
+.about-photo:not([src]), .about-photo[src=""] {
+    display: none;
 }
 
 .about-text p {

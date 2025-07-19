@@ -188,7 +188,7 @@ html {
     align-items: center;
     background: var(--gradient-primary);
     color: white;
-    padding-top: 80px;
+    padding: 80px 0 2rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -294,6 +294,7 @@ html {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin-top: 4rem;
+    margin-bottom: 2rem;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -522,8 +523,9 @@ html {
 
 /* About Section */
 .about {
-    padding: 6rem 0;
+    padding: 2rem 0 6rem 0;
     background: var(--bg-secondary);
+    margin-top: -2rem;
 }
 
 .about-content {

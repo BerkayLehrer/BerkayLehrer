@@ -648,6 +648,7 @@ async function getRealInstagramPosts(username) {
 async function getInstagramPostsBasicAPI(username) {
     try {
         // Instagram Basic Display API (daha güvenilir)
+        // Bu API için Instagram Developer hesabı gerekli
         const accessToken = 'YOUR_INSTAGRAM_ACCESS_TOKEN'; // Instagram Developer hesabından alınacak
         
         if (!accessToken || accessToken === 'YOUR_INSTAGRAM_ACCESS_TOKEN') {
@@ -681,6 +682,90 @@ async function getInstagramPostsBasicAPI(username) {
 }
 
 async function getInstagramPostsFree(username) {
+    try {
+        // Yeni ücretsiz Instagram scraper yöntemleri
+        const methods = [
+            // Yöntem 1: Instagram GraphQL API
+            async () => {
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const instagramUrl = `https://www.instagram.com/${username}/?__a=1&__d=1`;
+                return await fetch(proxyUrl + encodeURIComponent(instagramUrl));
+            },
+            // Yöntem 2: Instagram Public API
+            async () => {
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const instagramUrl = `https://www.instagram.com/${username}/?__a=1&__d=1`;
+                return await fetch(proxyUrl + instagramUrl, {
+                    headers: { 'Origin': window.location.origin }
+                });
+            },
+            // Yöntem 3: Instagram Web Scraper
+            async () => {
+                const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
+                const instagramUrl = `https://www.instagram.com/${username}/`;
+                return await fetch(proxyUrl + encodeURIComponent(instagramUrl));
+            }
+        ];
+        
+        // Tüm yöntemleri dene
+        for (let i = 0; i < methods.length; i++) {
+            try {
+                console.log(`Instagram scraper yöntem ${i + 1} deneniyor...`);
+                const response = await methods[i]();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return parseInstagramData(data, username);
+                }
+            } catch (error) {
+                console.log(`Yöntem ${i + 1} başarısız:`, error.message);
+                continue;
+            }
+        }
+        
+        throw new Error('Tüm ücretsiz yöntemler başarısız oldu');
+    } catch (error) {
+        console.error('Ücretsiz scraper hatası:', error);
+        return null;
+    }
+}
+
+function parseInstagramData(data, username) {
+    try {
+        // Instagram GraphQL API response parsing
+        if (data && data.graphql && data.graphql.user && data.graphql.user.edge_owner_to_timeline_media) {
+            const posts = data.graphql.user.edge_owner_to_timeline_media.edges.slice(0, 5);
+            return posts.map(post => ({
+                id: post.node.id,
+                image: post.node.display_url,
+                caption: post.node.edge_media_to_caption?.edges[0]?.node?.text || 'Instagram gönderisi',
+                likes: post.node.edge_media_preview_like?.count || 0,
+                comments: post.node.edge_media_to_comment?.count || 0,
+                timestamp: formatTimestamp(post.node.taken_at_timestamp)
+            }));
+        }
+        
+        // Instagram Public API response parsing
+        if (data && data.user && data.user.media && data.user.media.nodes) {
+            const posts = data.user.media.nodes.slice(0, 5);
+            return posts.map(post => ({
+                id: post.id,
+                image: post.display_src,
+                caption: post.caption || 'Instagram gönderisi',
+                likes: post.likes.count || 0,
+                comments: post.comments.count || 0,
+                timestamp: formatTimestamp(post.date)
+            }));
+        }
+        
+        throw new Error('Instagram verisi bulunamadı');
+    } catch (error) {
+        console.error('Instagram veri parsing hatası:', error);
+        return null;
+    }
+}
+
+async function getInstagramPostsFreeOld(username) {
     try {
         // Alternatif CORS proxy kullanıyoruz
         const proxyUrl = 'https://cors-anywhere.herokuapp.com/';

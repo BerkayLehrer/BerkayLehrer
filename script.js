@@ -596,31 +596,66 @@ function showNotification(message, type = 'info') {
 
 // Instagram Feed Setup
 function setupInstagramFeed() {
+    loadManualInstagramPosts();
+}
+
+async function loadManualInstagramPosts() {
     const instagramFeed = document.getElementById('instagramFeed');
     if (!instagramFeed) return;
     
-    // Instagram API'si için proxy kullanımı (CORS sorununu çözmek için)
-    loadInstagramPosts();
+    // Manuel Instagram gönderileri
+    const manualPosts = getManualInstagramPosts();
+    displayInstagramPosts(manualPosts);
 }
 
-async function loadInstagramPosts() {
-    const instagramFeed = document.getElementById('instagramFeed');
-    const username = 'berkaylehrer';
-    
-    try {
-        // Gerçek Instagram API'si kullanıyoruz
-        const posts = await getRealInstagramPosts(username);
-        displayInstagramPosts(posts);
-    } catch (error) {
-        console.error('Instagram posts yüklenirken hata:', error);
-        console.log('Mock data gösteriliyor...');
-        // Hata durumunda mock data göster
-        const posts = await getMockInstagramPosts();
-        displayInstagramPosts(posts);
-        
-        // Kullanıcıya bilgi ver
-        showInstagramInfo();
-    }
+function getManualInstagramPosts() {
+    return [
+        {
+            id: 'DMCmnEfMjyF',
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+            caption: 'Almanya\'da eğitim fırsatları hakkında bilgi almak isteyenler için özel danışmanlık hizmeti veriyorum. 🇩🇪 #AlmanyaEğitimi #EğitimDanışmanlığı',
+            likes: 45,
+            comments: 12,
+            timestamp: '2 saat önce',
+            instagramUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/?igsh=MXhqOTB2bG83YjRmeQ%3D%3D'
+        },
+        {
+            id: 'mock2',
+            image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop',
+            caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
+            likes: 38,
+            comments: 8,
+            timestamp: '1 gün önce',
+            instagramUrl: 'https://instagram.com/berkaylehrer'
+        },
+        {
+            id: 'mock3',
+            image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=400&fit=crop',
+            caption: 'Almanca dersleri ile dil becerilerinizi geliştirin. Birebir ve grup dersleri mevcuttur. 📚 #AlmancaDersleri #DilEğitimi',
+            likes: 52,
+            comments: 15,
+            timestamp: '2 gün önce',
+            instagramUrl: 'https://instagram.com/berkaylehrer'
+        },
+        {
+            id: 'mock4',
+            image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop',
+            caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri',
+            likes: 67,
+            comments: 23,
+            timestamp: '3 gün önce',
+            instagramUrl: 'https://instagram.com/berkaylehrer'
+        },
+        {
+            id: 'mock5',
+            image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop',
+            caption: 'Vize süreçlerinde uzman danışmanlık. Almanya\'ya gitmek isteyenler için kapsamlı rehberlik hizmeti. 🛂 #VizeDanışmanlığı',
+            likes: 41,
+            comments: 11,
+            timestamp: '4 gün önce',
+            instagramUrl: 'https://instagram.com/berkaylehrer'
+        }
+    ];
 }
 
 async function getRealInstagramPosts(username) {
@@ -927,10 +962,17 @@ function displayInstagramPosts(posts) {
 function createInstagramPost(post) {
     const postDiv = document.createElement('div');
     postDiv.className = 'instagram-post';
+    
+    // Instagram linki varsa tıklanabilir yap
+    const imageWrapper = post.instagramUrl ? 
+        `<a href="${post.instagramUrl}" target="_blank" class="instagram-post-link">` : 
+        '<div class="instagram-post-image">';
+    const imageWrapperClose = post.instagramUrl ? '</a>' : '</div>';
+    
     postDiv.innerHTML = `
-        <div class="instagram-post-image">
+        ${imageWrapper}
             <img src="${post.image}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
-        </div>
+        ${imageWrapperClose}
         <div class="instagram-post-content">
             <div class="instagram-post-header">
                 <div class="instagram-post-avatar">
@@ -953,14 +995,17 @@ function createInstagramPost(post) {
                     <i class="fas fa-comment"></i>
                     <span>${post.comments}</span>
                 </div>
+                ${post.instagramUrl ? `
+                <div class="instagram-post-stat">
+                    <a href="${post.instagramUrl}" target="_blank" class="instagram-view-btn">
+                        <i class="fab fa-instagram"></i>
+                        <span>Görüntüle</span>
+                    </a>
+                </div>
+                ` : ''}
             </div>
         </div>
     `;
-    
-    // Post'a tıklama efekti
-    postDiv.addEventListener('click', () => {
-        window.open(`https://instagram.com/berkaylehrer`, '_blank');
-    });
     
     return postDiv;
 }

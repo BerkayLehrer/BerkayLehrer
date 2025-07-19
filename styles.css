@@ -1876,6 +1876,31 @@ select:focus {
     transform: scale(1.05);
 }
 
+.instagram-post-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.instagram-post-link:hover img {
+    transform: scale(1.05);
+}
+
+.instagram-view-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e1306c;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.instagram-view-btn:hover {
+    color: #c13584;
+}
+
 .instagram-post-content {
     padding: 1.5rem;
 }

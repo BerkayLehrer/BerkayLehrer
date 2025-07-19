@@ -603,9 +603,52 @@ async function loadManualInstagramPosts() {
     const instagramFeed = document.getElementById('instagramFeed');
     if (!instagramFeed) return;
     
+    // Loading animasyonu göster
+    showInstagramLoading();
+    
     // Manuel Instagram gönderileri
     const manualPosts = getManualInstagramPosts();
-    displayInstagramPosts(manualPosts);
+    
+    // Gerçek verileri çekmeye çalış
+    try {
+        console.log('🔄 Instagram gerçek verileri çekiliyor...');
+        const updatedPosts = await loadRealInstagramData(manualPosts);
+        displayInstagramPosts(updatedPosts);
+    } catch (error) {
+        console.log('⚠️ Gerçek veriler alınamadı, manuel veriler gösteriliyor...');
+        displayInstagramPosts(manualPosts);
+    }
+}
+
+// Gerçek Instagram verilerini yükleme
+async function loadRealInstagramData(posts) {
+    const updatedPosts = [];
+    
+    for (const post of posts) {
+        try {
+            // Her post için gerçek veriyi çek
+            const realData = await fetchInstagramPublicData(post.instagramUrl);
+            
+            if (realData && realData.caption) {
+                // Gerçek veri varsa güncelle
+                updatedPosts.push({
+                    ...post,
+                    caption: realData.caption,
+                    author: realData.author || '@berkaylehrer'
+                });
+                console.log(`✅ ${post.id} için gerçek veri yüklendi`);
+            } else {
+                // Gerçek veri yoksa orijinal veriyi kullan
+                updatedPosts.push(post);
+                console.log(`⚠️ ${post.id} için gerçek veri alınamadı`);
+            }
+        } catch (error) {
+            console.error(`❌ ${post.id} için veri çekme hatası:`, error);
+            updatedPosts.push(post);
+        }
+    }
+    
+    return updatedPosts;
 }
 
 function getManualInstagramPosts() {
@@ -618,47 +661,63 @@ function getManualInstagramPosts() {
             likes: 45,
             comments: 12,
             timestamp: '2 saat önce',
-            instagramUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/?igsh=MXhqOTB2bG83YjRmeQ%3D%3D'
+            instagramUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/',
+            isPublic: true
         },
         {
-            id: 'mock2',
-            type: 'post',
-            image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop',
-            caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
-            likes: 38,
-            comments: 8,
-            timestamp: '1 gün önce',
-            instagramUrl: 'https://instagram.com/berkaylehrer'
-        },
-        {
-            id: 'mock3',
-            type: 'post',
-            image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=400&fit=crop',
-            caption: 'Almanca dersleri ile dil becerilerinizi geliştirin. Birebir ve grup dersleri mevcuttur. 📚 #AlmancaDersleri #DilEğitimi',
-            likes: 52,
-            comments: 15,
-            timestamp: '2 gün önce',
-            instagramUrl: 'https://instagram.com/berkaylehrer'
-        },
-        {
-            id: 'mock4',
+            id: 'DLzrIHJMIQq',
             type: 'reel',
-            embedUrl: 'https://www.instagram.com/reel/mock4/embed/',
-            caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri',
-            likes: 67,
-            comments: 23,
-            timestamp: '3 gün önce',
-            instagramUrl: 'https://instagram.com/berkaylehrer'
+            embedUrl: 'https://www.instagram.com/reel/DLzrIHJMIQq/embed/',
+            caption: 'Almanya\'da üniversite eğitimi için gerekli belgeler ve başvuru süreçleri hakkında detaylı bilgi. 🎓 #AlmanyaÜniversite #EğitimDanışmanlığı',
+            likes: 52,
+            comments: 18,
+            timestamp: '4 saat önce',
+            instagramUrl: 'https://www.instagram.com/reel/DLzrIHJMIQq/',
+            isPublic: true
         },
         {
-            id: 'mock5',
-            type: 'post',
-            image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop',
-            caption: 'Vize süreçlerinde uzman danışmanlık. Almanya\'ya gitmek isteyenler için kapsamlı rehberlik hizmeti. 🛂 #VizeDanışmanlığı',
+            id: 'DLw5Znws0dP',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/DLw5Znws0dP/embed/',
+            caption: 'Almanca dil sınavları ve sertifika programları ile kariyerinizi geliştirin. 📚 #AlmancaSınavları #DilEğitimi',
+            likes: 38,
+            comments: 9,
+            timestamp: '6 saat önce',
+            instagramUrl: 'https://www.instagram.com/reel/DLw5Znws0dP/',
+            isPublic: true
+        },
+        {
+            id: 'DMNPRHbs_li',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/DMNPRHbs_li/embed/',
+            caption: 'Almanya\'da çalışma vizesi ve iş bulma süreçleri hakkında uzman danışmanlık. 💼 #AlmanyaVizesi #İşDanışmanlığı',
+            likes: 67,
+            comments: 25,
+            timestamp: '1 gün önce',
+            instagramUrl: 'https://www.instagram.com/reel/DMNPRHbs_li/',
+            isPublic: true
+        },
+        {
+            id: 'DMKwOmAsw1_',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/DMKwOmAsw1_/embed/',
+            caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
             likes: 41,
             comments: 11,
-            timestamp: '4 gün önce',
-            instagramUrl: 'https://instagram.com/berkaylehrer'
+            timestamp: '2 gün önce',
+            instagramUrl: 'https://www.instagram.com/reel/DMKwOmAsw1_/',
+            isPublic: true
+        },
+        {
+            id: 'DMIMLdJM7L9',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/DMIMLdJM7L9/embed/',
+            caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri #EğitimBaşarısı',
+            likes: 73,
+            comments: 31,
+            timestamp: '3 gün önce',
+            instagramUrl: 'https://www.instagram.com/reel/DMIMLdJM7L9/',
+            isPublic: true
         }
     ];
 }
@@ -962,11 +1021,25 @@ function displayInstagramPosts(posts) {
         const postElement = createInstagramPost(post);
         instagramFeed.appendChild(postElement);
         
-        // Reel ise embed'i yükle
-        if (post.type === 'reel') {
+        // Embed varsa yükle
+        if (post.embedUrl) {
             loadInstagramEmbed(postElement, post.embedUrl);
         }
     });
+}
+
+// Loading animasyonu göster
+function showInstagramLoading() {
+    const instagramFeed = document.getElementById('instagramFeed');
+    if (!instagramFeed) return;
+    
+    instagramFeed.innerHTML = `
+        <div class="instagram-loading">
+            <div class="loading-spinner"></div>
+            <p>Instagram verileri yükleniyor...</p>
+            <small>Gerçek açıklamalar çekiliyor</small>
+        </div>
+    `;
 }
 
 function loadInstagramEmbed(postElement, embedUrl) {
@@ -1003,8 +1076,8 @@ function createInstagramPost(post) {
     
     let mediaContent = '';
     
-    // Reel ise embed, post ise resim göster
-    if (post.type === 'reel' && post.embedUrl) {
+    // Tüm gönderiler embed olarak göster
+    if (post.embedUrl) {
         mediaContent = `
             <div class="instagram-post-media">
                 <iframe 
@@ -1020,22 +1093,18 @@ function createInstagramPost(post) {
                 <div class="instagram-embed-overlay">
                     <div class="embed-loading">
                         <div class="loading-spinner"></div>
-                        <p>Instagram Reel yükleniyor...</p>
+                        <p>Instagram ${post.type === 'reel' ? 'Reel' : 'Post'} yükleniyor...</p>
+                        ${!post.isPublic ? '<small class="access-note">⚠️ Giriş gerekebilir</small>' : ''}
                     </div>
                 </div>
             </div>
         `;
     } else {
-        // Normal post için resim
-        const imageWrapper = post.instagramUrl ? 
-            `<a href="${post.instagramUrl}" target="_blank" class="instagram-post-link">` : 
-            '<div class="instagram-post-image">';
-        const imageWrapperClose = post.instagramUrl ? '</a>' : '</div>';
-        
+        // Fallback için resim göster
         mediaContent = `
-            ${imageWrapper}
-                <img src="${post.image}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
-            ${imageWrapperClose}
+            <div class="instagram-post-image">
+                <img src="${post.image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop'}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
+            </div>
         `;
     }
     
@@ -1050,6 +1119,7 @@ function createInstagramPost(post) {
                     <h4>@berkaylehrer</h4>
                     <span>${post.timestamp}</span>
                     ${post.type === 'reel' ? '<span class="post-type-badge">🎬 Reel</span>' : ''}
+                    ${!post.isPublic ? '<span class="access-badge">🔒 Giriş Gerekli</span>' : ''}
                 </div>
             </div>
             <div class="instagram-post-caption">
@@ -1064,26 +1134,21 @@ function createInstagramPost(post) {
                     <i class="fas fa-comment"></i>
                     <span>${post.comments}</span>
                 </div>
-                ${post.instagramUrl ? `
-                <div class="instagram-post-stat">
-                    <a href="${post.instagramUrl}" target="_blank" class="instagram-view-btn">
-                        <i class="fab fa-instagram"></i>
-                        <span>${post.type === 'reel' ? 'Reel\'i İzle' : 'Görüntüle'}</span>
-                    </a>
-                </div>
-                ` : ''}
             </div>
         </div>
     `;
     
     // Embed yüklendiğinde overlay'i kaldır
-    if (post.type === 'reel') {
+    if (post.embedUrl) {
         const iframe = postDiv.querySelector('iframe');
         const overlay = postDiv.querySelector('.instagram-embed-overlay');
         
         if (iframe && overlay) {
             iframe.addEventListener('load', () => {
-                overlay.style.display = 'none';
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
             });
         }
     }
@@ -1141,6 +1206,86 @@ function createEmbedUrl(instagramUrl) {
         return instagramUrl.replace('/?', '/embed/').replace('?igsh=', '');
     }
     return instagramUrl;
+}
+
+// Instagram public embed verilerini çekme (API olmadan)
+async function fetchInstagramPublicData(instagramUrl) {
+    try {
+        // Instagram embed sayfasından veri çekme
+        const embedUrl = instagramUrl.replace('/?', '/embed/').replace('?igsh=', '');
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(embedUrl));
+        
+        if (!response.ok) {
+            throw new Error('Instagram embed sayfası yüklenemedi');
+        }
+        
+        const html = await response.text();
+        
+        // HTML'den veri çıkarma
+        const data = parseInstagramEmbedHTML(html);
+        return data;
+        
+    } catch (error) {
+        console.error('Instagram public veri çekme hatası:', error);
+        return null;
+    }
+}
+
+// Instagram embed HTML'inden veri çıkarma
+function parseInstagramEmbedHTML(html) {
+    try {
+        // Caption/description çıkarma
+        const captionMatch = html.match(/<meta property="og:description" content="([^"]+)"/);
+        const caption = captionMatch ? captionMatch[1] : '';
+        
+        // Thumbnail URL çıkarma
+        const thumbnailMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
+        const thumbnail = thumbnailMatch ? thumbnailMatch[1] : '';
+        
+        // Author name çıkarma
+        const authorMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
+        const author = authorMatch ? authorMatch[1] : '@berkaylehrer';
+        
+        return {
+            caption: caption,
+            thumbnail: thumbnail,
+            author: author
+        };
+    } catch (error) {
+        console.error('HTML parsing hatası:', error);
+        return null;
+    }
+}
+
+// Instagram erişim durumunu test etme
+function testInstagramAccess(instagramUrl) {
+    return new Promise((resolve) => {
+        const testIframe = document.createElement('iframe');
+        testIframe.src = createEmbedUrl(instagramUrl);
+        testIframe.style.display = 'none';
+        
+        testIframe.addEventListener('load', () => {
+            document.body.removeChild(testIframe);
+            resolve(true); // Erişim var
+        });
+        
+        testIframe.addEventListener('error', () => {
+            document.body.removeChild(testIframe);
+            resolve(false); // Erişim yok
+        });
+        
+        document.body.appendChild(testIframe);
+        
+        // 5 saniye sonra timeout
+        setTimeout(() => {
+            if (document.body.contains(testIframe)) {
+                document.body.removeChild(testIframe);
+                resolve(false);
+            }
+        }, 5000);
+    });
 }
 
 // Add CSS for form validation

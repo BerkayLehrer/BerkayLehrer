@@ -608,14 +608,119 @@ async function loadInstagramPosts() {
     const username = 'berkaylehrer';
     
     try {
-        // Instagram Basic Display API veya alternatif çözüm
-        // Bu örnekte mock data kullanıyoruz, gerçek API için Instagram Developer hesabı gerekli
-        const posts = await getMockInstagramPosts();
+        // Gerçek Instagram API'si kullanıyoruz
+        const posts = await getRealInstagramPosts(username);
         displayInstagramPosts(posts);
     } catch (error) {
         console.error('Instagram posts yüklenirken hata:', error);
-        showInstagramError();
+        // Hata durumunda mock data göster
+        const posts = await getMockInstagramPosts();
+        displayInstagramPosts(posts);
     }
+}
+
+async function getRealInstagramPosts(username) {
+    try {
+        // Önce ücretsiz Instagram scraper deneyelim
+        const posts = await getInstagramPostsFree(username);
+        if (posts && posts.length > 0) {
+            return posts;
+        }
+        
+        // Eğer ücretsiz scraper çalışmazsa, RapidAPI kullan
+        return await getInstagramPostsRapidAPI(username);
+    } catch (error) {
+        console.error('Gerçek Instagram API hatası:', error);
+        throw error;
+    }
+}
+
+async function getInstagramPostsFree(username) {
+    try {
+        // Ücretsiz Instagram scraper (CORS proxy ile)
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const instagramUrl = `https://www.instagram.com/${username}/?__a=1&__d=1`;
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(instagramUrl));
+        
+        if (!response.ok) {
+            throw new Error('Ücretsiz scraper çalışmadı');
+        }
+        
+        const data = await response.json();
+        
+        if (data && data.graphql && data.graphql.user && data.graphql.user.edge_owner_to_timeline_media) {
+            const posts = data.graphql.user.edge_owner_to_timeline_media.edges.slice(0, 5);
+            return posts.map(post => ({
+                id: post.node.id,
+                image: post.node.display_url,
+                caption: post.node.edge_media_to_caption?.edges[0]?.node?.text || 'Instagram gönderisi',
+                likes: post.node.edge_media_preview_like?.count || 0,
+                comments: post.node.edge_media_to_comment?.count || 0,
+                timestamp: formatTimestamp(post.node.taken_at_timestamp)
+            }));
+        }
+        
+        throw new Error('Instagram verisi bulunamadı');
+    } catch (error) {
+        console.error('Ücretsiz scraper hatası:', error);
+        return null;
+    }
+}
+
+async function getInstagramPostsRapidAPI(username) {
+    try {
+        // RapidAPI Instagram Scraper kullanıyoruz
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY', // Buraya RapidAPI key'inizi ekleyin
+                'X-RapidAPI-Host': 'instagram-bulk-profile-scrapper.p.rapidapi.com'
+            }
+        };
+
+        const response = await fetch(`https://instagram-bulk-profile-scrapper.p.rapidapi.com/clients/api/ig/media_by_username/${username}`, options);
+        
+        if (!response.ok) {
+            throw new Error('Instagram API yanıt vermedi');
+        }
+        
+        const data = await response.json();
+        
+        if (data && data.response && data.response.posts) {
+            return data.response.posts.slice(0, 5).map(post => ({
+                id: post.id,
+                image: post.display_url,
+                caption: post.caption || 'Instagram gönderisi',
+                likes: post.likes || 0,
+                comments: post.comments || 0,
+                timestamp: formatTimestamp(post.timestamp)
+            }));
+        } else {
+            throw new Error('Instagram verisi bulunamadı');
+        }
+    } catch (error) {
+        console.error('RapidAPI hatası:', error);
+        throw error;
+    }
+}
+
+function formatTimestamp(timestamp) {
+    if (!timestamp) return 'Yakın zamanda';
+    
+    const date = new Date(timestamp * 1000);
+    const now = new Date();
+    const diff = now - date;
+    
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+    
+    if (minutes < 60) return `${minutes} dakika önce`;
+    if (hours < 24) return `${hours} saat önce`;
+    if (days < 7) return `${days} gün önce`;
+    
+    return date.toLocaleDateString('tr-TR');
 }
 
 async function getMockInstagramPosts() {

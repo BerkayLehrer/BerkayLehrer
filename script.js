@@ -612,7 +612,8 @@ function getManualInstagramPosts() {
     return [
         {
             id: 'DMCmnEfMjyF',
-            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/embed/',
             caption: 'Almanya\'da eğitim fırsatları hakkında bilgi almak isteyenler için özel danışmanlık hizmeti veriyorum. 🇩🇪 #AlmanyaEğitimi #EğitimDanışmanlığı',
             likes: 45,
             comments: 12,
@@ -621,6 +622,7 @@ function getManualInstagramPosts() {
         },
         {
             id: 'mock2',
+            type: 'post',
             image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop',
             caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
             likes: 38,
@@ -630,6 +632,7 @@ function getManualInstagramPosts() {
         },
         {
             id: 'mock3',
+            type: 'post',
             image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=400&fit=crop',
             caption: 'Almanca dersleri ile dil becerilerinizi geliştirin. Birebir ve grup dersleri mevcuttur. 📚 #AlmancaDersleri #DilEğitimi',
             likes: 52,
@@ -639,7 +642,8 @@ function getManualInstagramPosts() {
         },
         {
             id: 'mock4',
-            image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop',
+            type: 'reel',
+            embedUrl: 'https://www.instagram.com/reel/mock4/embed/',
             caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri',
             likes: 67,
             comments: 23,
@@ -648,6 +652,7 @@ function getManualInstagramPosts() {
         },
         {
             id: 'mock5',
+            type: 'post',
             image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop',
             caption: 'Vize süreçlerinde uzman danışmanlık. Almanya\'ya gitmek isteyenler için kapsamlı rehberlik hizmeti. 🛂 #VizeDanışmanlığı',
             likes: 41,
@@ -956,23 +961,86 @@ function displayInstagramPosts(posts) {
     posts.forEach(post => {
         const postElement = createInstagramPost(post);
         instagramFeed.appendChild(postElement);
+        
+        // Reel ise embed'i yükle
+        if (post.type === 'reel') {
+            loadInstagramEmbed(postElement, post.embedUrl);
+        }
     });
+}
+
+function loadInstagramEmbed(postElement, embedUrl) {
+    const iframe = postElement.querySelector('iframe');
+    const overlay = postElement.querySelector('.instagram-embed-overlay');
+    
+    if (iframe && overlay) {
+        // Embed yüklendiğinde overlay'i kaldır
+        iframe.addEventListener('load', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        });
+        
+        // Hata durumunda
+        iframe.addEventListener('error', () => {
+            overlay.innerHTML = `
+                <div class="embed-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Reel yüklenemedi</p>
+                    <a href="${embedUrl.replace('/embed/', '/')}" target="_blank" class="btn btn-primary">
+                        Instagram'da İzle
+                    </a>
+                </div>
+            `;
+        });
+    }
 }
 
 function createInstagramPost(post) {
     const postDiv = document.createElement('div');
     postDiv.className = 'instagram-post';
     
-    // Instagram linki varsa tıklanabilir yap
-    const imageWrapper = post.instagramUrl ? 
-        `<a href="${post.instagramUrl}" target="_blank" class="instagram-post-link">` : 
-        '<div class="instagram-post-image">';
-    const imageWrapperClose = post.instagramUrl ? '</a>' : '</div>';
+    let mediaContent = '';
+    
+    // Reel ise embed, post ise resim göster
+    if (post.type === 'reel' && post.embedUrl) {
+        mediaContent = `
+            <div class="instagram-post-media">
+                <iframe 
+                    src="${post.embedUrl}" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowtransparency="true"
+                    allowfullscreen="true"
+                    class="instagram-embed">
+                </iframe>
+                <div class="instagram-embed-overlay">
+                    <div class="embed-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Instagram Reel yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        // Normal post için resim
+        const imageWrapper = post.instagramUrl ? 
+            `<a href="${post.instagramUrl}" target="_blank" class="instagram-post-link">` : 
+            '<div class="instagram-post-image">';
+        const imageWrapperClose = post.instagramUrl ? '</a>' : '</div>';
+        
+        mediaContent = `
+            ${imageWrapper}
+                <img src="${post.image}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
+            ${imageWrapperClose}
+        `;
+    }
     
     postDiv.innerHTML = `
-        ${imageWrapper}
-            <img src="${post.image}" alt="Instagram Post" loading="lazy" onerror="this.style.display='none'">
-        ${imageWrapperClose}
+        ${mediaContent}
         <div class="instagram-post-content">
             <div class="instagram-post-header">
                 <div class="instagram-post-avatar">
@@ -981,6 +1049,7 @@ function createInstagramPost(post) {
                 <div class="instagram-post-info">
                     <h4>@berkaylehrer</h4>
                     <span>${post.timestamp}</span>
+                    ${post.type === 'reel' ? '<span class="post-type-badge">🎬 Reel</span>' : ''}
                 </div>
             </div>
             <div class="instagram-post-caption">
@@ -999,13 +1068,25 @@ function createInstagramPost(post) {
                 <div class="instagram-post-stat">
                     <a href="${post.instagramUrl}" target="_blank" class="instagram-view-btn">
                         <i class="fab fa-instagram"></i>
-                        <span>Görüntüle</span>
+                        <span>${post.type === 'reel' ? 'Reel\'i İzle' : 'Görüntüle'}</span>
                     </a>
                 </div>
                 ` : ''}
             </div>
         </div>
     `;
+    
+    // Embed yüklendiğinde overlay'i kaldır
+    if (post.type === 'reel') {
+        const iframe = postDiv.querySelector('iframe');
+        const overlay = postDiv.querySelector('.instagram-embed-overlay');
+        
+        if (iframe && overlay) {
+            iframe.addEventListener('load', () => {
+                overlay.style.display = 'none';
+            });
+        }
+    }
     
     return postDiv;
 }
@@ -1034,6 +1115,32 @@ function showInstagramInfo() {
     console.log('1. Instagram Developer hesabı oluşturun');
     console.log('2. Basic Display API erişimi alın');
     console.log('3. Access Token\'ı script.js\'de güncelleyin');
+}
+
+// Yeni Instagram gönderisi ekleme fonksiyonu
+function addInstagramPost(postData) {
+    const posts = getManualInstagramPosts();
+    posts.unshift(postData);
+    
+    // Sadece son 5 gönderiyi tut
+    if (posts.length > 5) {
+        posts.splice(5);
+    }
+    
+    displayInstagramPosts(posts);
+}
+
+// Instagram link'inden embed URL oluşturma
+function createEmbedUrl(instagramUrl) {
+    // Reel linki ise embed URL'ine çevir
+    if (instagramUrl.includes('/reel/')) {
+        return instagramUrl.replace('/?', '/embed/').replace('?igsh=', '');
+    }
+    // Post linki ise embed URL'ine çevir
+    else if (instagramUrl.includes('/p/')) {
+        return instagramUrl.replace('/?', '/embed/').replace('?igsh=', '');
+    }
+    return instagramUrl;
 }
 
 // Add CSS for form validation

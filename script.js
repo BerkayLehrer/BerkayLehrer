@@ -613,21 +613,31 @@ async function loadInstagramPosts() {
         displayInstagramPosts(posts);
     } catch (error) {
         console.error('Instagram posts yüklenirken hata:', error);
+        console.log('Mock data gösteriliyor...');
         // Hata durumunda mock data göster
         const posts = await getMockInstagramPosts();
         displayInstagramPosts(posts);
+        
+        // Kullanıcıya bilgi ver
+        showInstagramInfo();
     }
 }
 
 async function getRealInstagramPosts(username) {
     try {
-        // Önce ücretsiz Instagram scraper deneyelim
-        const posts = await getInstagramPostsFree(username);
+        // Önce Instagram Basic Display API deneyelim
+        const posts = await getInstagramPostsBasicAPI(username);
         if (posts && posts.length > 0) {
             return posts;
         }
         
-        // Eğer ücretsiz scraper çalışmazsa, RapidAPI kullan
+        // Sonra ücretsiz Instagram scraper deneyelim
+        const posts2 = await getInstagramPostsFree(username);
+        if (posts2 && posts2.length > 0) {
+            return posts2;
+        }
+        
+        // Son olarak RapidAPI kullan
         return await getInstagramPostsRapidAPI(username);
     } catch (error) {
         console.error('Gerçek Instagram API hatası:', error);
@@ -635,13 +645,52 @@ async function getRealInstagramPosts(username) {
     }
 }
 
+async function getInstagramPostsBasicAPI(username) {
+    try {
+        // Instagram Basic Display API (daha güvenilir)
+        const accessToken = 'YOUR_INSTAGRAM_ACCESS_TOKEN'; // Instagram Developer hesabından alınacak
+        
+        if (!accessToken || accessToken === 'YOUR_INSTAGRAM_ACCESS_TOKEN') {
+            throw new Error('Instagram Access Token gerekli');
+        }
+        
+        const response = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}`);
+        
+        if (!response.ok) {
+            throw new Error('Instagram Basic API yanıt vermedi');
+        }
+        
+        const data = await response.json();
+        
+        if (data && data.data) {
+            return data.data.slice(0, 5).map(post => ({
+                id: post.id,
+                image: post.media_url || post.thumbnail_url,
+                caption: post.caption || 'Instagram gönderisi',
+                likes: 0, // Basic API'de likes yok
+                comments: 0, // Basic API'de comments yok
+                timestamp: formatTimestamp(new Date(post.timestamp).getTime() / 1000)
+            }));
+        }
+        
+        throw new Error('Instagram Basic API verisi bulunamadı');
+    } catch (error) {
+        console.error('Instagram Basic API hatası:', error);
+        return null;
+    }
+}
+
 async function getInstagramPostsFree(username) {
     try {
-        // Ücretsiz Instagram scraper (CORS proxy ile)
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        // Alternatif CORS proxy kullanıyoruz
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         const instagramUrl = `https://www.instagram.com/${username}/?__a=1&__d=1`;
         
-        const response = await fetch(proxyUrl + encodeURIComponent(instagramUrl));
+        const response = await fetch(proxyUrl + instagramUrl, {
+            headers: {
+                'Origin': window.location.origin
+            }
+        });
         
         if (!response.ok) {
             throw new Error('Ücretsiz scraper çalışmadı');
@@ -674,7 +723,7 @@ async function getInstagramPostsRapidAPI(username) {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY', // Buraya RapidAPI key'inizi ekleyin
+                'X-RapidAPI-Key': 'a63a3b86acmshb7f5b2bd650c078p16d475jsn6e91e8a967df', // Buraya RapidAPI key'inizi ekleyin
                 'X-RapidAPI-Host': 'instagram-bulk-profile-scrapper.p.rapidapi.com'
             }
         };
@@ -837,6 +886,15 @@ function showInstagramError() {
             </a>
         </div>
     `;
+}
+
+function showInstagramInfo() {
+    // Console'a bilgi mesajı
+    console.log('ℹ️ Instagram API sorunları nedeniyle demo veriler gösteriliyor.');
+    console.log('📝 Gerçek Instagram entegrasyonu için:');
+    console.log('1. Instagram Developer hesabı oluşturun');
+    console.log('2. Basic Display API erişimi alın');
+    console.log('3. Access Token\'ı script.js\'de güncelleyin');
 }
 
 // Add CSS for form validation

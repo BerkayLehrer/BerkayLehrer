@@ -613,9 +613,18 @@ async function loadManualInstagramPosts() {
     try {
         console.log('🔄 Instagram gerçek verileri çekiliyor...');
         const updatedPosts = await loadRealInstagramData(manualPosts);
-        displayInstagramPosts(updatedPosts);
+        
+        // En az bir gerçek veri alındıysa göster
+        const hasRealData = updatedPosts.some(post => post.caption && post.caption !== '');
+        if (hasRealData) {
+            displayInstagramPosts(updatedPosts);
+            console.log('✅ Gerçek veriler başarıyla yüklendi');
+        } else {
+            console.log('⚠️ Hiç gerçek veri alınamadı, manuel veriler gösteriliyor...');
+            displayInstagramPosts(manualPosts);
+        }
     } catch (error) {
-        console.log('⚠️ Gerçek veriler alınamadı, manuel veriler gösteriliyor...');
+        console.log('❌ Veri çekme hatası, manuel veriler gösteriliyor...');
         displayInstagramPosts(manualPosts);
     }
 }
@@ -629,22 +638,37 @@ async function loadRealInstagramData(posts) {
             // Her post için gerçek veriyi çek
             const realData = await fetchInstagramPublicData(post.instagramUrl);
             
-            if (realData && realData.caption) {
+            if (realData && realData.caption && realData.caption.length > 10) {
                 // Gerçek veri varsa güncelle
                 updatedPosts.push({
                     ...post,
                     caption: realData.caption,
-                    author: realData.author || '@berkaylehrer'
+                    author: realData.author || '@berkaylehrer',
+                    hasRealCaption: true
                 });
-                console.log(`✅ ${post.id} için gerçek veri yüklendi`);
+                console.log(`✅ ${post.id} için gerçek veri yüklendi: "${realData.caption.substring(0, 50)}..."`);
             } else {
                 // Gerçek veri yoksa orijinal veriyi kullan
-                updatedPosts.push(post);
-                console.log(`⚠️ ${post.id} için gerçek veri alınamadı`);
+                updatedPosts.push({
+                    ...post,
+                    hasRealCaption: false
+                });
+                console.log(`⚠️ ${post.id} için gerçek veri alınamadı - manuel veri kullanılıyor`);
             }
         } catch (error) {
-            console.error(`❌ ${post.id} için veri çekme hatası:`, error);
+            console.error(`❌ ${post.id} için veri çekme hatası:`, error.message);
+            // Hata durumunda orijinal veriyi kullan
             updatedPosts.push(post);
+            console.log(`🔄 ${post.id} için manuel veri kullanılıyor`);
+        }
+        
+        // Her post arasında kısa bekleme (rate limiting)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Her 3 post'ta bir daha uzun bekleme
+        if ((posts.indexOf(post) + 1) % 3 === 0) {
+            console.log('⏳ Rate limiting - 2 saniye bekleniyor...');
+            await new Promise(resolve => setTimeout(resolve, 2000));
         }
     }
     
@@ -1088,6 +1112,8 @@ function createInstagramPost(post) {
                     scrolling="no" 
                     allowtransparency="true"
                     allowfullscreen="true"
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                    loading="lazy"
                     class="instagram-embed">
                 </iframe>
                 <div class="instagram-embed-overlay">
@@ -1124,6 +1150,32 @@ function createInstagramPost(post) {
             </div>
             <div class="instagram-post-caption">
                 ${post.caption}
+                ${post.embedUrl && !post.hasRealCaption ? `
+                <div class="instagram-embed-caption">
+                    <div class="embed-caption-header">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram Açıklaması</span>
+                    </div>
+                    <div class="embed-caption-content">
+                        <p>Bu reel'in tam açıklaması Instagram'da görüntülenebilir. Reel'i oynatmak için yukarıdaki video alanına tıklayın.</p>
+                        <a href="${post.instagramUrl}" target="_blank" class="instagram-caption-link">
+                            <i class="fab fa-instagram"></i>
+                            Instagram'da Görüntüle
+                        </a>
+                    </div>
+                </div>
+                ` : ''}
+                ${post.hasRealCaption ? `
+                <div class="instagram-embed-caption real-caption">
+                    <div class="embed-caption-header">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Gerçek Instagram Açıklaması</span>
+                    </div>
+                    <div class="embed-caption-content">
+                        <p>✅ Bu açıklama Instagram'dan otomatik olarak çekildi.</p>
+                    </div>
+                </div>
+                ` : ''}
             </div>
             <div class="instagram-post-stats">
                 <div class="instagram-post-stat">
@@ -1213,19 +1265,54 @@ async function fetchInstagramPublicData(instagramUrl) {
     try {
         // Instagram embed sayfasından veri çekme
         const embedUrl = instagramUrl.replace('/?', '/embed/').replace('?igsh=', '');
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
         
-        const response = await fetch(proxyUrl + encodeURIComponent(embedUrl));
+        // Farklı proxy servisleri dene (çalışan servisler önce)
+        const proxyServices = [
+            'https://api.codetabs.com/v1/proxy?quest=',
+            'https://thingproxy.freeboard.io/fetch/',
+            'https://cors-anywhere.herokuapp.com/'
+        ];
         
-        if (!response.ok) {
-            throw new Error('Instagram embed sayfası yüklenemedi');
+        for (let i = 0; i < proxyServices.length; i++) {
+            try {
+                console.log(`🔄 Proxy ${i + 1} deneniyor: ${proxyServices[i]}`);
+                
+                const proxyUrl = proxyServices[i];
+                const fullUrl = proxyUrl + encodeURIComponent(embedUrl);
+                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 saniye timeout
+                
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Origin': window.location.origin,
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                    },
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    const html = await response.text();
+                    const data = parseInstagramEmbedHTML(html);
+                    
+                    if (data && data.caption) {
+                        console.log(`✅ Proxy ${i + 1} başarılı`);
+                        return data;
+                    }
+                }
+            } catch (proxyError) {
+                console.log(`❌ Proxy ${i + 1} başarısız:`, proxyError.message);
+                if (proxyError.name === 'AbortError') {
+                    console.log(`⏰ Proxy ${i + 1} timeout oldu`);
+                }
+                continue;
+            }
         }
         
-        const html = await response.text();
-        
-        // HTML'den veri çıkarma
-        const data = parseInstagramEmbedHTML(html);
-        return data;
+        throw new Error('Tüm proxy servisleri başarısız oldu');
         
     } catch (error) {
         console.error('Instagram public veri çekme hatası:', error);
@@ -1236,17 +1323,63 @@ async function fetchInstagramPublicData(instagramUrl) {
 // Instagram embed HTML'inden veri çıkarma
 function parseInstagramEmbedHTML(html) {
     try {
-        // Caption/description çıkarma
-        const captionMatch = html.match(/<meta property="og:description" content="([^"]+)"/);
-        const caption = captionMatch ? captionMatch[1] : '';
+        // Caption/description çıkarma - farklı meta tag formatları
+        let caption = '';
+        const captionPatterns = [
+            /<meta property="og:description" content="([^"]+)"/,
+            /<meta name="description" content="([^"]+)"/,
+            /<meta property="twitter:description" content="([^"]+)"/,
+            /<title>([^<]+)<\/title>/
+        ];
+        
+        for (const pattern of captionPatterns) {
+            const match = html.match(pattern);
+            if (match && match[1]) {
+                caption = match[1];
+                break;
+            }
+        }
         
         // Thumbnail URL çıkarma
-        const thumbnailMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
-        const thumbnail = thumbnailMatch ? thumbnailMatch[1] : '';
+        let thumbnail = '';
+        const thumbnailPatterns = [
+            /<meta property="og:image" content="([^"]+)"/,
+            /<meta property="twitter:image" content="([^"]+)"/,
+            /<meta name="image" content="([^"]+)"/
+        ];
+        
+        for (const pattern of thumbnailPatterns) {
+            const match = html.match(pattern);
+            if (match && match[1]) {
+                thumbnail = match[1];
+                break;
+            }
+        }
         
         // Author name çıkarma
-        const authorMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
-        const author = authorMatch ? authorMatch[1] : '@berkaylehrer';
+        let author = '@berkaylehrer';
+        const authorPatterns = [
+            /<meta property="og:title" content="([^"]+)"/,
+            /<meta name="author" content="([^"]+)"/,
+            /<meta property="twitter:title" content="([^"]+)"/
+        ];
+        
+        for (const pattern of authorPatterns) {
+            const match = html.match(pattern);
+            if (match && match[1]) {
+                author = match[1];
+                break;
+            }
+        }
+        
+        // Caption temizleme
+        if (caption) {
+            caption = caption.replace(/&amp;/g, '&')
+                           .replace(/&lt;/g, '<')
+                           .replace(/&gt;/g, '>')
+                           .replace(/&quot;/g, '"')
+                           .replace(/&#39;/g, "'");
+        }
         
         return {
             caption: caption,

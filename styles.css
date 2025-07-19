@@ -2013,6 +2013,69 @@ select:focus {
     background: #c13584;
 }
 
+/* Instagram Embed Caption Styles */
+.instagram-embed-caption {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(225, 48, 108, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid #e1306c;
+}
+
+.embed-caption-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #e1306c;
+    font-size: 0.9rem;
+}
+
+.embed-caption-header i {
+    font-size: 1rem;
+}
+
+.embed-caption-content p {
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.instagram-caption-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e1306c;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e1306c;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.instagram-caption-link:hover {
+    background: #e1306c;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.real-caption {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+}
+
+.real-caption .embed-caption-header {
+    color: #10b981;
+}
+
+.real-caption .embed-caption-header i {
+    color: #10b981;
+}
+
 .instagram-post-content {
     padding: 1.5rem;
 }

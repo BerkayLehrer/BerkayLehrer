@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Berkay Kan - Özgeçmiş. Hukuki danışmanlık, eğitim danışmanlığı ve Almanca dersleri konularında uzmanlık alanları.">
+    <meta name="keywords" content="özgeçmiş, cv, berkay kan, hukuki danışmanlık, eğitim danışmanlığı">
+    <meta name="author" content="Berkay Kan">
+    <title>Özgeçmiş - Berkay Kan</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <div class="logo-circle"></div>
+                    <span>BK</span>
+                </div>
+                <h2>Berkay Kan</h2>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-home"></i></span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="index.html#about" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="ozgecmis.html" class="nav-link active">
+                    <span class="nav-icon"><i class="fas fa-file-alt"></i></span>
+                    <span class="nav-text">Özgeçmiş</span>
+                </a>
+                <a href="index.html#services" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
+                    <span class="nav-text">Hizmetler</span>
+                </a>
+                <a href="index.html#instagram" class="nav-link">
+                    <span class="nav-icon"><i class="fab fa-instagram"></i></span>
+                    <span class="nav-text">Instagram</span>
+                </a>
+                <a href="index.html#youtube" class="nav-link">
+                    <span class="nav-icon"><i class="fab fa-youtube"></i></span>
+                    <span class="nav-text">YouTube</span>
+                </a>
+            </div>
+            <div class="nav-cta">
+                <button class="btn btn-primary btn-sm" onclick="window.location.href='index.html#contact'">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>İletişim</span>
+                </button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Özgeçmiş</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">Berkay</span>
+                        <span class="title-line">Kan</span>
+                    </h1>
+                    <h2 class="hero-subtitle">Hukuki Danışmanlık & Eğitim Danışmanı</h2>
+                    <p class="hero-description">
+                        Almanya'da eğitim ve hukuki süreçlerde uzman danışmanlık hizmeti. 
+                        Deneyimli ekibimizle yanınızdayız.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg" onclick="scrollToExperience()">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>Deneyimlerim</span>
+                        </button>
+                        <button class="btn btn-outline btn-lg" onclick="window.location.href='index.html#contact'">
+                            <i class="fas fa-envelope"></i>
+                            <span>İletişime Geç</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Özgeçmiş</h2>
+                <p class="section-subtitle">Eğitim, deneyim ve uzmanlık alanlarım</p>
+            </div>
+            
+            <div class="resume-content">
+                <!-- Personal Info -->
+                <div class="resume-section">
+                    <h3 class="resume-section-title">
+                        <i class="fas fa-user"></i>
+                        Kişisel Bilgiler
+                    </h3>
+                    <div class="resume-card">
+                        <div class="personal-info">
+                            <div class="info-item">
+                                <span class="info-label">Ad Soyad:</span>
+                                <span class="info-value">Berkay Kan</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Doğum Tarihi:</span>
+                                <span class="info-value">1995</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">E-posta:</span>
+                                <span class="info-value">info@berkaykan.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Telefon:</span>
+                                <span class="info-value">+90 XXX XXX XX XX</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Adres:</span>
+                                <span class="info-value">İstanbul, Türkiye</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Diller:</span>
+                                <span class="info-value">Türkçe (Ana dil), Almanca (İleri), İngilizce (İleri)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="resume-section">
+                    <h3 class="resume-section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Eğitim
+                    </h3>
+                    <div class="resume-card">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Hukuk Fakültesi</h4>
+                                    <p class="timeline-subtitle">İstanbul Üniversitesi</p>
+                                    <p class="timeline-period">2013 - 2017</p>
+                                    <p class="timeline-description">
+                                        Hukuk alanında lisans eğitimi. Hukuki danışmanlık ve avukatlık 
+                                        konularında temel bilgiler edinildi.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Almanca Dil Eğitimi</h4>
+                                    <p class="timeline-subtitle">Goethe-Institut</p>
+                                    <p class="timeline-period">2016 - 2018</p>
+                                    <p class="timeline-description">
+                                        C1 seviyesinde Almanca dil eğitimi. Almanya'da eğitim ve 
+                                        çalışma için gerekli dil yeterliliği kazanıldı.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Eğitim Danışmanlığı Sertifikası</h4>
+                                    <p class="timeline-subtitle">Uluslararası Eğitim Danışmanlığı Derneği</p>
+                                    <p class="timeline-period">2018</p>
+                                    <p class="timeline-description">
+                                        Yurtdışı eğitim danışmanlığı konusunda profesyonel sertifika. 
+                                        Öğrenci danışmanlığı ve vize süreçleri konularında uzmanlık.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="resume-section">
+                    <h3 class="resume-section-title">
+                        <i class="fas fa-briefcase"></i>
+                        İş Deneyimi
+                    </h3>
+                    <div class="resume-card">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Hukuki Danışman</h4>
+                                    <p class="timeline-subtitle">Serbest Avukatlık</p>
+                                    <p class="timeline-period">2018 - Günümüz</p>
+                                    <p class="timeline-description">
+                                        Hukuki konularda danışmanlık hizmeti. Sözleşme hazırlama, 
+                                        dava takibi ve hukuki mütalaa hizmetleri verilmektedir.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Eğitim Danışmanı</h4>
+                                    <p class="timeline-subtitle">Almanya Eğitim Danışmanlığı</p>
+                                    <p class="timeline-period">2019 - Günümüz</p>
+                                    <p class="timeline-description">
+                                        Almanya'da eğitim almak isteyen öğrencilere danışmanlık. 
+                                        Üniversite seçimi, başvuru süreçleri ve vize danışmanlığı.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Almanca Öğretmeni</h4>
+                                    <p class="timeline-subtitle">Özel Ders ve Grup Eğitimi</p>
+                                    <p class="timeline-period">2018 - Günümüz</p>
+                                    <p class="timeline-description">
+                                        Birebir ve grup dersleri ile Almanca öğretimi. Test hazırlığı 
+                                        ve konuşma pratiği konularında uzmanlık.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="resume-section">
+                    <h3 class="resume-section-title">
+                        <i class="fas fa-star"></i>
+                        Uzmanlık Alanları
+                    </h3>
+                    <div class="resume-card">
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h4>Hukuki Danışmanlık</h4>
+                                <div class="skill-items">
+                                    <span class="skill-item">Sözleşme Hazırlama</span>
+                                    <span class="skill-item">Dava Takibi</span>
+                                    <span class="skill-item">Hukuki Mütalaa</span>
+                                    <span class="skill-item">Hak Arama</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Eğitim Danışmanlığı</h4>
+                                <div class="skill-items">
+                                    <span class="skill-item">Üniversite Seçimi</span>
+                                    <span class="skill-item">Başvuru Süreci</span>
+                                    <span class="skill-item">Vize Danışmanlığı</span>
+                                    <span class="skill-item">Konaklama Desteği</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Dil Eğitimi</h4>
+                                <div class="skill-items">
+                                    <span class="skill-item">Almanca Öğretimi</span>
+                                    <span class="skill-item">Test Hazırlığı</span>
+                                    <span class="skill-item">Konuşma Pratiği</span>
+                                    <span class="skill-item">İş Almancası</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Teknik Beceriler</h4>
+                                <div class="skill-items">
+                                    <span class="skill-item">Microsoft Office</span>
+                                    <span class="skill-item">Hukuki Yazılımlar</span>
+                                    <span class="skill-item">Online Eğitim</span>
+                                    <span class="skill-item">Dijital Pazarlama</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificates -->
+                <div class="resume-section">
+                    <h3 class="resume-section-title">
+                        <i class="fas fa-certificate"></i>
+                        Sertifikalar ve Başarılar
+                    </h3>
+                    <div class="resume-card">
+                        <div class="certificates-grid">
+                            <div class="certificate-item">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div class="certificate-content">
+                                    <h4>Goethe-Zertifikat C1</h4>
+                                    <p>Almanca dil yeterlilik sertifikası</p>
+                                    <span class="certificate-date">2018</span>
+                                </div>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="certificate-content">
+                                    <h4>Eğitim Danışmanlığı Sertifikası</h4>
+                                    <p>Uluslararası eğitim danışmanlığı</p>
+                                    <span class="certificate-date">2018</span>
+                                </div>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="certificate-content">
+                                    <h4>Avukatlık Ruhsatı</h4>
+                                    <p>Türkiye Barolar Birliği</p>
+                                    <span class="certificate-date">2018</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>İletişime Geçin</h3>
+                <p>Projeleriniz için profesyonel danışmanlık hizmeti almak istiyorsanız, benimle iletişime geçin.</p>
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='index.html#contact'">
+                        <i class="fas fa-envelope"></i>
+                        <span>Mesaj Gönder</span>
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home"></i>
+                        <span>Ana Sayfa</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <div class="logo-circle"></div>
+                            <span>BK</span>
+                        </div>
+                        <h3>Berkay Kan</h3>
+                    </div>
+                    <p>Hukuki Danışman & Eğitim Danışmanı</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Hizmetler</h4>
+                    <ul>
+                        <li><a href="index.html#services">Hukuki Danışmanlık</a></li>
+                        <li><a href="index.html#services">Eğitim Danışmanlığı</a></li>
+                        <li><a href="index.html#services">Almanca Dersleri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="index.html#about">Hakkımda</a></li>
+                        <li><a href="ozgecmis.html">Özgeçmiş</a></li>
+                        <li><a href="index.html#contact">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>İletişim</h4>
+                    <p><i class="fas fa-envelope"></i> info@berkaykan.com</p>
+                    <p><i class="fas fa-phone"></i> +90 XXX XXX XX XX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Berkay Kan. Tüm hakları saklıdır.</p>
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">Kullanım Şartları</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <script>
+        function scrollToExperience() {
+            const experienceSection = document.getElementById('resume');
+            if (experienceSection) {
+                experienceSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // Active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === 'ozgecmis.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

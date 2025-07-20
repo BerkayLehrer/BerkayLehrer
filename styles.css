@@ -438,7 +438,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+    /*background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);*/
+    background : linear-gradient(135deg, rgb(29 31 37) 0%, rgba(29, 78, 216, 0.1) 100%)
 }
 
 @keyframes float {

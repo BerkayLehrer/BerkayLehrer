@@ -2398,6 +2398,38 @@ body {
     background: rgba(37, 99, 235, 0.1);
 }
 
+/* Google Form Container */
+.google-form-container {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.google-form-container iframe {
+    border: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+}
+
+.google-form-container iframe:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Responsive Google Form */
+@media (max-width: 768px) {
+    .google-form-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .google-form-container iframe {
+        height: 700px;
+    }
+}
+
 /* Print Styles */
 @media print {
     .navbar,

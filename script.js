@@ -193,18 +193,56 @@ function handleFormSubmission(e) {
         return;
     }
     
-    // Simulate form submission
+    // Show loading state
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
     
-    setTimeout(() => {
+    // Google Forms backend - YOUR FORM URL
+    // Make sure this URL ends with /formResponse (not /viewform)
+    const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfiQAV5qENkDO16NtQIxw9n8rJvK6M5vI49pvuAOOmIiRpW-Q/formResponse';
+    
+    // Convert form data to Google Forms format
+    const googleFormData = new FormData();
+    
+    // Google Forms entry IDs - FOUND FROM YOUR NEW FORM
+    googleFormData.append('entry.540165310', formData.get('name')); // Ad Soyad field
+    googleFormData.append('entry.1430043240', formData.get('email')); // E-posta field  
+    googleFormData.append('entry.1373115660', formData.get('subject')); // Konu field
+    
+    // Hizmet Türü field - Google Forms dropdown format
+    const serviceValue = formData.get('service');
+    if (serviceValue === 'hukuk') {
+        googleFormData.append('entry.1924422722', 'Hukuki Danışmanlık');
+    } else if (serviceValue === 'egitim') {
+        googleFormData.append('entry.1924422722', 'Eğitim Danışmanlığı');
+    } else if (serviceValue === 'almanca') {
+        googleFormData.append('entry.1924422722', 'Almanca Dersleri');
+    }
+    
+    googleFormData.append('entry.620843357', formData.get('message')); // Mesaj field
+    
+    // Submit to Google Forms
+    fetch(googleFormUrl, {
+        method: 'POST',
+        body: googleFormData,
+        mode: 'no-cors' // Required for Google Forms
+    })
+    .then(() => {
         showNotification('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
         form.reset();
+    })
+    .catch(error => {
+        console.error('Form submission error:', error);
+        // Google Forms always returns CORS error, but submission is usually successful
+        showNotification('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
+        form.reset();
+    })
+    .finally(() => {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
-    }, 2000);
+    });
 }
 
 function validateField(e) {

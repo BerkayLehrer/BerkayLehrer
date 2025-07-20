@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
+    setupLoadingScreen();
     setupMobileNavigation();
     setupSmoothScrolling();
     setupNavbarEffects();
@@ -11,14 +12,31 @@ function initializeApp() {
     setupFormHandling();
     setupCounterAnimations();
     setupParallaxEffects();
-    setupLoadingAnimations();
-    setupHoverEffects();
+    setupCursorTrail();
     setupTypingEffect();
     setupScrollProgress();
     setupBackToTop();
     setupServiceCardEffects();
     setupSocialMediaEffects();
     setupPerformanceOptimizations();
+    setupInstagramEmbeds();
+    setupYouTubeEmbeds();
+    
+    console.log('🚀 Berkay Kan Website - All features initialized successfully!');
+}
+
+// Loading Screen
+function setupLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (!loadingScreen) return;
+    
+    // Simulate loading progress
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }, 2000);
 }
 
 // Mobile Navigation
@@ -131,7 +149,7 @@ function setupIntersectionObserver() {
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.service-card, .benefit, .step, .stat, .contact-item');
+    const animateElements = document.querySelectorAll('.service-card, .stat-item, .contact-item, .about-content');
     animateElements.forEach(el => {
         observer.observe(el);
     });
@@ -139,7 +157,7 @@ function setupIntersectionObserver() {
 
 // Form Handling
 function setupFormHandling() {
-    const contactForm = document.querySelector('.contact-form form');
+    const contactForm = document.querySelector('#contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmission);
         
@@ -158,7 +176,7 @@ function handleFormSubmission(e) {
     const form = e.target;
     const formData = new FormData(form);
     const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
+    const originalText = submitBtn.innerHTML;
     
     // Validate all fields
     const inputs = form.querySelectorAll('input, textarea');
@@ -176,17 +194,14 @@ function handleFormSubmission(e) {
     }
     
     // Simulate form submission
-    submitBtn.textContent = 'Gönderiliyor...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
-    
-    // Show loading animation
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
     
     setTimeout(() => {
         showNotification('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
         form.reset();
-        submitBtn.textContent = originalText;
+        submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
     }, 2000);
@@ -202,7 +217,6 @@ function validateField(e) {
     
     // Check if field is required
     if (field.hasAttribute('required') && !value) {
-        field.classList.add('invalid');
         showFieldError(field, `${fieldName} alanı zorunludur.`);
         return false;
     }
@@ -211,219 +225,152 @@ function validateField(e) {
     if (field.type === 'email' && value) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value)) {
-            field.classList.add('invalid');
-            showFieldError(field, 'Geçerli bir e-posta adresi girin.');
+            showFieldError(field, 'Geçerli bir e-posta adresi giriniz.');
             return false;
         }
     }
     
-    // Phone validation
-    if (field.type === 'tel' && value) {
-        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-        if (!phoneRegex.test(value)) {
-            field.classList.add('invalid');
-            showFieldError(field, 'Geçerli bir telefon numarası girin.');
-            return false;
-        }
-    }
-    
-    if (value) {
-        field.classList.add('valid');
-    }
-    
+    // Show success state
+    field.classList.add('valid');
+    hideFieldError(field);
     return true;
 }
 
 function clearValidation(e) {
     const field = e.target;
-    field.classList.remove('invalid');
+    field.classList.remove('valid', 'invalid');
     hideFieldError(field);
 }
 
 function showFieldError(field, message) {
-    let errorElement = field.parentNode.querySelector('.field-error');
-    if (!errorElement) {
-        errorElement = document.createElement('div');
-        errorElement.className = 'field-error';
-        field.parentNode.appendChild(errorElement);
+    field.classList.add('invalid');
+    const errorDiv = field.parentElement.querySelector('.field-error');
+    if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
     }
-    errorElement.textContent = message;
-    errorElement.style.display = 'block';
 }
 
 function hideFieldError(field) {
-    const errorElement = field.parentNode.querySelector('.field-error');
-    if (errorElement) {
-        errorElement.style.display = 'none';
+    const errorDiv = field.parentElement.querySelector('.field-error');
+    if (errorDiv) {
+        errorDiv.style.display = 'none';
     }
 }
 
 // Counter Animations
 function setupCounterAnimations() {
-    const statsSection = document.querySelector('.about-stats');
-    if (statsSection) {
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        statsObserver.observe(statsSection);
-    }
+    const counters = document.querySelectorAll('.stat-number[data-target]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
 }
 
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat h3');
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent);
-        const increment = target / 100;
-        let current = 0;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                counter.textContent = Math.ceil(current) + '+';
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target + '+';
-            }
-        };
-        
-        updateCounter();
-    });
+function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+    
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            counter.textContent = Math.floor(current) + '+';
+            requestAnimationFrame(updateCounter);
+        } else {
+            counter.textContent = target + '+';
+        }
+    };
+    
+    updateCounter();
 }
 
 // Parallax Effects
 function setupParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('.hero-background, .floating-card');
+    
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
         
-        if (hero) {
-            const rate = scrolled * -0.5;
-            hero.style.transform = `translateY(${rate}px)`;
-        }
-        
-        // Parallax for other elements
-        const parallaxElements = document.querySelectorAll('.parallax');
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.speed || 0.5;
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
+        parallaxElements.forEach((element, index) => {
+            const rate = scrolled * (0.1 + index * 0.05);
+            element.style.transform = `translateY(${rate}px)`;
         });
     });
 }
 
-// Loading Animations
-function setupLoadingAnimations() {
-    window.addEventListener('load', () => {
-        const loadingElements = document.querySelectorAll('.loading');
-        loadingElements.forEach((el, index) => {
-            setTimeout(() => {
-                el.classList.add('loaded');
-            }, index * 100);
-        });
-        
-        // Add entrance animation to hero elements
-        const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-description');
-        heroElements.forEach((el, index) => {
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 200);
-        });
-        
-        // Force show images
-        const images = document.querySelectorAll('.hero-banner, .about-photo');
-        images.forEach(img => {
-            img.style.opacity = '1';
-            img.style.visibility = 'visible';
-            img.style.display = 'block';
-            img.classList.add('loaded');
-        });
+// Cursor Trail Effect
+function setupCursorTrail() {
+    const cursorTrail = document.querySelector('.cursor-trail');
+    if (!cursorTrail) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let trailX = 0;
+    let trailY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
-}
-
-// Hover Effects
-function setupHoverEffects() {
-    // Service card hover effects
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-15px) scale(1.02)';
-            card.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.3)';
-        });
+    
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.1;
+        trailY += (mouseY - trailY) * 0.1;
         
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
-            card.style.boxShadow = '';
-        });
-    });
-
-    // Benefit card hover effects
-    document.querySelectorAll('.benefit').forEach(benefit => {
-        benefit.addEventListener('mouseenter', () => {
-            benefit.style.transform = 'translateY(-5px)';
-            benefit.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
-        });
+        cursorTrail.style.left = trailX + 'px';
+        cursorTrail.style.top = trailY + 'px';
         
-        benefit.addEventListener('mouseleave', () => {
-            benefit.style.transform = 'translateY(0)';
-            benefit.style.boxShadow = '';
-        });
-    });
-
-    // Step card hover effects
-    document.querySelectorAll('.step').forEach(step => {
-        step.addEventListener('mouseenter', () => {
-            step.style.transform = 'translateY(-5px)';
-            step.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
-        });
-        
-        step.addEventListener('mouseleave', () => {
-            step.style.transform = 'translateY(0)';
-            step.style.boxShadow = '';
-        });
-    });
+        requestAnimationFrame(animateTrail);
+    }
+    
+    animateTrail();
 }
 
 // Typing Effect
 function setupTypingEffect() {
     const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 150);
-    }
+    if (!heroTitle) return;
+    
+    const titleLines = heroTitle.querySelectorAll('.title-line');
+    titleLines.forEach((line, index) => {
+        const text = line.textContent;
+        line.textContent = '';
+        
+        setTimeout(() => {
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                if (i < text.length) {
+                    line.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 100);
+        }, index * 1000);
+    });
 }
 
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Scroll Progress Indicator
+// Scroll Progress
 function setupScrollProgress() {
     const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
     progressBar.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
         width: 0%;
         height: 3px;
-        background: linear-gradient(45deg, #2563eb, #1d4ed8);
-        z-index: 9999;
+        background: var(--gradient-primary);
+        z-index: 10000;
         transition: width 0.1s ease;
     `;
     document.body.appendChild(progressBar);
@@ -434,18 +381,18 @@ function setupScrollProgress() {
     });
 }
 
-// Back to Top Button
+// Back to Top
 function setupBackToTop() {
-    const backToTopBtn = document.createElement('button');
-    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTopBtn.className = 'back-to-top';
-    backToTopBtn.style.cssText = `
+    const backToTop = document.createElement('button');
+    backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    backToTop.className = 'back-to-top';
+    backToTop.style.cssText = `
         position: fixed;
         bottom: 30px;
         right: 30px;
         width: 50px;
         height: 50px;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        background: var(--gradient-primary);
         color: white;
         border: none;
         border-radius: 50%;
@@ -454,62 +401,54 @@ function setupBackToTop() {
         visibility: hidden;
         transition: all 0.3s ease;
         z-index: 1000;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     `;
-    document.body.appendChild(backToTopBtn);
+    document.body.appendChild(backToTop);
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.style.opacity = '1';
-            backToTopBtn.style.visibility = 'visible';
-        } else {
-            backToTopBtn.style.opacity = '0';
-            backToTopBtn.style.visibility = 'hidden';
-        }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
+    backToTop.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     });
     
-    backToTopBtn.addEventListener('mouseenter', () => {
-        backToTopBtn.style.transform = 'translateY(-3px) scale(1.1)';
-        backToTopBtn.style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.4)';
-    });
-    
-    backToTopBtn.addEventListener('mouseleave', () => {
-        backToTopBtn.style.transform = 'translateY(0) scale(1)';
-        backToTopBtn.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.3)';
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.style.opacity = '1';
+            backToTop.style.visibility = 'visible';
+        } else {
+            backToTop.style.opacity = '0';
+            backToTop.style.visibility = 'hidden';
+        }
     });
 }
 
 // Service Card Effects
 function setupServiceCardEffects() {
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('click', () => {
-            // Add click animation
-            card.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                card.style.transform = '';
-            }, 150);
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
         });
     });
 }
 
 // Social Media Effects
 function setupSocialMediaEffects() {
-    document.querySelectorAll('.social-link').forEach(link => {
+    const socialLinks = document.querySelectorAll('.social-link');
+    
+    socialLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
-            link.style.transform = 'translateY(-5px) scale(1.1)';
-            link.style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.4)';
+            link.style.transform = 'translateY(-3px) scale(1.1)';
         });
         
         link.addEventListener('mouseleave', () => {
             link.style.transform = 'translateY(0) scale(1)';
-            link.style.boxShadow = '';
         });
     });
 }
@@ -534,16 +473,14 @@ function setupPerformanceOptimizations() {
     // Debounce scroll events
     let scrollTimeout;
     window.addEventListener('scroll', () => {
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
-        }
+        clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
-            // Handle scroll events here
-        }, 16); // 60fps
+            // Handle scroll events
+        }, 16);
     });
 }
 
-// Instagram Embed Setup
+// Instagram Embeds
 function setupInstagramEmbeds() {
     const instagramFeed = document.getElementById('instagramFeed');
     if (!instagramFeed) return;
@@ -551,6 +488,7 @@ function setupInstagramEmbeds() {
     const instagramPosts = [
         {
             id: 'DMCmnEfMjyF',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/embed/',
             caption: 'Almanya\'da eğitim fırsatları hakkında bilgi almak isteyenler için özel danışmanlık hizmeti veriyorum. 🇩🇪 #AlmanyaEğitimi #EğitimDanışmanlığı',
             likes: 45,
@@ -559,6 +497,7 @@ function setupInstagramEmbeds() {
         },
         {
             id: 'DLzrIHJMIQq',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DLzrIHJMIQq/embed/',
             caption: 'Almanya\'da üniversite eğitimi için gerekli belgeler ve başvuru süreçleri hakkında detaylı bilgi. 🎓 #AlmanyaÜniversite #EğitimDanışmanlığı',
             likes: 52,
@@ -567,6 +506,7 @@ function setupInstagramEmbeds() {
         },
         {
             id: 'DLw5Znws0dP',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DLw5Znws0dP/embed/',
             caption: 'Almanca dil sınavları ve sertifika programları ile kariyerinizi geliştirin. 📚 #AlmancaSınavları #DilEğitimi',
             likes: 38,
@@ -575,6 +515,7 @@ function setupInstagramEmbeds() {
         },
         {
             id: 'DMNPRHbs_li',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DMNPRHbs_li/embed/',
             caption: 'Almanya\'da çalışma vizesi ve iş bulma süreçleri hakkında uzman danışmanlık. 💼 #AlmanyaVizesi #İşDanışmanlığı',
             likes: 67,
@@ -583,6 +524,7 @@ function setupInstagramEmbeds() {
         },
         {
             id: 'DMKwOmAsw1_',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DMKwOmAsw1_/embed/',
             caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
             likes: 41,
@@ -591,6 +533,7 @@ function setupInstagramEmbeds() {
         },
         {
             id: 'DMIMLdJM7L9',
+            type: 'reel',
             embedUrl: 'https://www.instagram.com/reel/DMIMLdJM7L9/embed/',
             caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri #EğitimBaşarısı',
             likes: 73,
@@ -599,48 +542,31 @@ function setupInstagramEmbeds() {
         }
     ];
     
-    instagramFeed.innerHTML = '';
-    
-    instagramPosts.forEach((post, index) => {
+    instagramPosts.forEach(post => {
         const postElement = createInstagramEmbedPost(post);
         instagramFeed.appendChild(postElement);
-        
-        // Animasyon efekti
-        setTimeout(() => {
-            postElement.style.opacity = '1';
-            postElement.style.transform = 'translateY(0)';
-        }, index * 200);
     });
 }
 
 function createInstagramEmbedPost(post) {
     const postDiv = document.createElement('div');
     postDiv.className = 'instagram-post';
-    postDiv.setAttribute('data-type', 'reel');
-    postDiv.style.opacity = '0';
-    postDiv.style.transform = 'translateY(20px)';
-    postDiv.style.transition = 'all 0.5s ease';
+    postDiv.setAttribute('data-type', post.type);
     
     postDiv.innerHTML = `
         <div class="instagram-post-media">
             <iframe 
                 src="${post.embedUrl}" 
-                width="100%" 
-                height="400" 
-                frameborder="0" 
-                scrolling="no" 
-                allowtransparency="true"
-                allowfullscreen="true"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                loading="lazy"
                 class="instagram-embed"
-                referrerpolicy="no-referrer"
-                crossorigin="anonymous">
+                frameborder="0"
+                scrolling="no"
+                allowtransparency="true"
+                allowfullscreen="true">
             </iframe>
             <div class="instagram-embed-overlay">
                 <div class="embed-loading">
                     <div class="loading-spinner"></div>
-                    <p>Instagram Reel yükleniyor...</p>
+                    <p>Instagram içeriği yükleniyor...</p>
                 </div>
             </div>
         </div>
@@ -652,11 +578,10 @@ function createInstagramEmbedPost(post) {
                 <div class="instagram-post-info">
                     <h4>@berkaylehrer</h4>
                     <span>${post.timestamp}</span>
-                    <span class="post-type-badge">🎬 Reel</span>
                 </div>
             </div>
             <div class="instagram-post-caption">
-                ${post.caption}
+                <p>${post.caption}</p>
             </div>
             <div class="instagram-post-stats">
                 <div class="instagram-post-stat">
@@ -671,30 +596,196 @@ function createInstagramEmbedPost(post) {
         </div>
     `;
     
-    // Embed yüklendiğinde overlay'i kaldır
-    const iframe = postDiv.querySelector('iframe');
+    // Handle iframe load events
+    const iframe = postDiv.querySelector('.instagram-embed');
     const overlay = postDiv.querySelector('.instagram-embed-overlay');
     
-    if (iframe && overlay) {
-        iframe.addEventListener('load', () => {
+    // Set iframe attributes for better compatibility
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('frameborder', '0');
+    
+    iframe.addEventListener('load', () => {
+        setTimeout(() => {
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 300);
-        });
-        
-        iframe.addEventListener('error', () => {
-            overlay.innerHTML = `
-                <div class="embed-error">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Reel yüklenemedi</p>
-                    <a href="${post.embedUrl.replace('/embed/', '/')}" target="_blank" class="btn btn-primary">
-                        Instagram'da İzle
-                    </a>
+        }, 1000); // Give more time for Instagram to load
+    });
+    
+    iframe.addEventListener('error', () => {
+        overlay.innerHTML = `
+            <div class="embed-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>İçerik yüklenemedi</p>
+                <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">
+                    Tekrar Dene
+                </button>
+            </div>
+        `;
+    });
+    
+    // Fallback for slow loading
+    setTimeout(() => {
+        if (overlay.style.display !== 'none') {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+    }, 5000); // Hide overlay after 5 seconds if still visible
+    
+    return postDiv;
+}
+
+// YouTube Embed Setup
+function setupYouTubeEmbeds() {
+    const youtubeFeed = document.getElementById('youtubeFeed');
+    if (!youtubeFeed) return;
+
+    const youtubeVideos = [
+        {
+            videoId: 'h2seO_TI4B8',
+            title: 'Almanya\'da Eğitim Rehberi - Bölüm 1',
+            description: 'Almanya\'da eğitim almak isteyenler için kapsamlı rehber. Üniversite seçimi ve başvuru süreçleri.',
+            views: 1250,
+            likes: 89,
+            timeAgo: '1 hafta önce'
+        },
+        {
+            videoId: 'T-wx3MsCavA',
+            title: 'Almanya Vize Başvurusu Nasıl Yapılır?',
+            description: 'Almanya öğrenci vizesi başvuru süreci, gerekli belgeler ve püf noktaları hakkında detaylı bilgi.',
+            views: 2100,
+            likes: 156,
+            timeAgo: '2 hafta önce'
+        },
+        {
+            videoId: 'h2seO_TI4B8',
+            title: 'Almanca Öğrenme Teknikleri',
+            description: 'Almanca öğrenmek isteyenler için etkili teknikler ve pratik yöntemler paylaşıyorum.',
+            views: 890,
+            likes: 67,
+            timeAgo: '3 hafta önce'
+        },
+        {
+            videoId: 'T-wx3MsCavA',
+            title: 'Almanya\'da Yaşam Maliyetleri',
+            description: 'Almanya\'da öğrenci olarak yaşamanın maliyetleri ve bütçe planlaması hakkında gerçekçi bilgiler.',
+            views: 1800,
+            likes: 134,
+            timeAgo: '1 ay önce'
+        },
+        {
+            videoId: 'h2seO_TI4B8',
+            title: 'Almanya\'da Hukuki Danışmanlık',
+            description: 'Almanya\'da hukuki konularda danışmanlık hizmetleri ve yasal süreçler hakkında bilgi.',
+            views: 950,
+            likes: 78,
+            timeAgo: '1 ay önce'
+        },
+        {
+            videoId: 'T-wx3MsCavA',
+            title: 'Almanya\'da Kariyer Fırsatları',
+            description: 'Almanya\'da kariyer yapmak isteyenler için iş piyasası analizi ve fırsatlar.',
+            views: 1500,
+            likes: 112,
+            timeAgo: '2 ay önce'
+        }
+    ];
+
+    youtubeVideos.forEach(video => {
+        const videoDiv = createYouTubePost(video);
+        youtubeFeed.appendChild(videoDiv);
+    });
+}
+
+function createYouTubePost(video) {
+    const postDiv = document.createElement('div');
+    postDiv.className = 'youtube-post';
+    
+    postDiv.innerHTML = `
+        <div class="youtube-post-media">
+            <iframe 
+                class="youtube-embed" 
+                src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1&controls=1&showinfo=0" 
+                title="${video.title}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+            <div class="youtube-embed-overlay">
+                <div class="embed-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Video yükleniyor...</p>
                 </div>
-            `;
-        });
-    }
+            </div>
+        </div>
+        <div class="youtube-post-content">
+            <div class="youtube-post-header">
+                <div class="youtube-post-avatar">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="youtube-post-info">
+                    <h4>Berkay Kan</h4>
+                    <span>${video.timeAgo}</span>
+                </div>
+            </div>
+            <div class="youtube-post-caption">
+                <p><strong>${video.title}</strong></p>
+                <p>${video.description}</p>
+            </div>
+            <div class="youtube-post-stats">
+                <div class="youtube-post-stat">
+                    <i class="fas fa-eye"></i>
+                    <span>${video.views}</span>
+                </div>
+                <div class="youtube-post-stat">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>${video.likes}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Handle iframe load events
+    const iframe = postDiv.querySelector('.youtube-embed');
+    const overlay = postDiv.querySelector('.youtube-embed-overlay');
+    
+    // Set iframe attributes for better compatibility
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.setAttribute('frameborder', '0');
+    
+    iframe.addEventListener('load', () => {
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }, 1000);
+    });
+    
+    iframe.addEventListener('error', () => {
+        overlay.innerHTML = `
+            <div class="embed-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Video yüklenemedi</p>
+                <button class="btn btn-primary" onclick="this.parentElement.parentElement.style.display='none'">
+                    Tekrar Dene
+                </button>
+            </div>
+        `;
+    });
+    
+    // Fallback for slow loading
+    setTimeout(() => {
+        if (overlay.style.display !== 'none') {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+    }, 5000);
     
     return postDiv;
 }
@@ -703,35 +794,21 @@ function createInstagramEmbedPost(post) {
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    notification.textContent = message;
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
         padding: 1rem 1.5rem;
         border-radius: 8px;
-        color: white;
-        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         z-index: 10000;
         transform: translateX(100%);
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
         max-width: 300px;
     `;
-    
-    // Set background color based on type
-    switch(type) {
-        case 'success':
-            notification.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-            break;
-        case 'error':
-            notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-            break;
-        case 'warning':
-            notification.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
-            break;
-        default:
-            notification.style.background = 'linear-gradient(135deg, #2563eb, #1d4ed8)';
-    }
+    notification.textContent = message;
     
     document.body.appendChild(notification);
     
@@ -740,7 +817,7 @@ function showNotification(message, type = 'info') {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Remove after 5 seconds
+    // Auto remove after 5 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => {
@@ -749,35 +826,67 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Add CSS for form validation
-const style = document.createElement('style');
-style.textContent = `
-    .field-error {
-        color: #ef4444;
-        font-size: 0.875rem;
-        margin-top: 0.5rem;
-        display: none;
+// Scroll Functions
+function scrollToServices() {
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+        servicesSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
-    
-    .form-group input.valid,
-    .form-group textarea.valid {
-        border-color: #10b981;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-    }
-    
-    .form-group input.invalid,
-    .form-group textarea.invalid {
-        border-color: #ef4444;
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-    }
-    
-    .notification {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-`;
-document.head.appendChild(style);
+}
 
-// Initialize Instagram Embeds when DOM is loaded
+function scrollToContact() {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// Service Navigation
+function navigateToService(url) {
+    // Add loading animation
+    document.body.style.cursor = 'wait';
+    
+    // Add transition effect
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(37, 99, 235, 0.9);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+    `;
+    overlay.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yönlendiriliyor...';
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        window.location.href = url;
+    }, 1000);
+}
+
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    setupInstagramEmbeds();
+    // Remove loading screen when page is loaded
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 2000);
+    }
 }); 

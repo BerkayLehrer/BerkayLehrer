@@ -706,30 +706,6 @@ function setupYouTubeEmbeds() {
             views: 890,
             likes: 67,
             timeAgo: '3 hafta önce'
-        },
-        {
-            videoId: 'T-wx3MsCavA',
-            title: 'Almanya\'da Yaşam Maliyetleri',
-            description: 'Almanya\'da öğrenci olarak yaşamanın maliyetleri ve bütçe planlaması hakkında gerçekçi bilgiler.',
-            views: 1800,
-            likes: 134,
-            timeAgo: '1 ay önce'
-        },
-        {
-            videoId: 'h2seO_TI4B8',
-            title: 'Almanya\'da Hukuki Danışmanlık',
-            description: 'Almanya\'da hukuki konularda danışmanlık hizmetleri ve yasal süreçler hakkında bilgi.',
-            views: 950,
-            likes: 78,
-            timeAgo: '1 ay önce'
-        },
-        {
-            videoId: 'T-wx3MsCavA',
-            title: 'Almanya\'da Kariyer Fırsatları',
-            description: 'Almanya\'da kariyer yapmak isteyenler için iş piyasası analizi ve fırsatlar.',
-            views: 1500,
-            likes: 112,
-            timeAgo: '2 ay önce'
         }
     ];
 

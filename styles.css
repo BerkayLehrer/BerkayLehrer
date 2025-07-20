@@ -439,7 +439,8 @@ body {
     right: 0;
     bottom: 0;
     /*background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);*/
-    background : linear-gradient(135deg, rgb(29 31 37) 0%, rgba(29, 78, 216, 0.1) 100%)
+    /*background : linear-gradient(135deg, rgb(29 31 37) 0%, rgba(29, 78, 216, 0.1) 100%)*/
+    background : linear-gradient(262deg, rgb(111 131 188 / 0%) 0%, rgba(29, 78, 216, 0.1) 100%)
 }
 
 @keyframes float {
@@ -528,11 +529,50 @@ body {
 }
 
 .hero-subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.subtitle-item {
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     font-weight: 600;
-    margin-bottom: var(--spacing-lg);
-    color: rgba(255, 255, 255, 0.9);
-    animation: fadeInUp 1s ease-out 0.3s both;
+    text-align: left;
+    transition: all var(--transition-normal);
+}
+
+.subtitle-item:hover {
+    transform: scale(1.05);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle-red {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle-yellow {
+    background: linear-gradient(135deg, #dd0000 0%, #cc0000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(221, 0, 0, 0.3);
+}
+
+.subtitle-black {
+    background: linear-gradient(135deg, #ffce00 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(255, 206, 0, 0.3);
 }
 
 .hero-description {
@@ -650,8 +690,8 @@ body {
 }
 
 .center-profile-image {
-    width: 375px;
-    height: 375px;
+    width: 330px;
+    height: 330px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid rgba(255, 255, 255, 0.3);
@@ -665,8 +705,8 @@ body {
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     color: white;
     font-size: var(--font-size-xs);
     font-weight: 600;
@@ -775,11 +815,8 @@ body {
 
 .floating-card span {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    font-size: 0.6rem;
-    line-height: 1.2;
-    text-align: center;
-    word-wrap: break-word;
-    max-width: 60px;
+    font-size: 0.7rem;
+
 }
 
 /* Her kart için span renkleri */
@@ -806,8 +843,7 @@ body {
 /* Tam yuvarlak düzen - her kart 30 derece aralıklarla yerleştirilir (12 kart) */
 .floating-card:nth-child(2) {
     top: 0%;
-    left: 45%;
-    transform: translateX(-50%);
+    left: 42%;
     animation-delay: 0s;
 }
 
@@ -830,8 +866,8 @@ body {
 }
 
 .floating-card:nth-child(6) {
-    bottom: 25%;
-    right: 8.66%;
+    bottom: 20%;
+    right: 8%;
     animation-delay: 2s;
 }
 
@@ -843,39 +879,38 @@ body {
 
 .floating-card:nth-child(8) {
     bottom: 0%;
-    left: 45%;
-    animation-delay: 3s;
-
+    left: 42%;
+    animation-delay: 2.5s;
 }
 
 .floating-card:nth-child(9) {
     bottom: 8.66%;
     left: 25%;
-    animation-delay: 3.5s;
+    animation-delay: 2s;
 }
 
 .floating-card:nth-child(10) {
-    bottom: 25%;
-    left: 8.66%;
-    animation-delay: 4s;
+    bottom: 22%;
+    left: 10%;
+    animation-delay: 1.5s;
 }
 
 .floating-card:nth-child(11) {
     top: 45%;
     left: 0%;
-    animation-delay: 4.5s;
+    animation-delay: 1s;
 }
 
 .floating-card:nth-child(12) {
     top: 25%;
     left: 8.66%;
-    animation-delay: 5s;
+    animation-delay: 0.5s;
 }
 
 .floating-card:nth-child(13) {
     top: 8.66%;
     left: 25%;
-    animation-delay: 5.5s;
+    animation-delay: 0s;
 }
 
 /* Her kart için ayrı hover efektleri */
@@ -2166,11 +2201,7 @@ body {
         font-size: 0.5rem;
     }
     
-    .floating-card span {
-        max-width: 60px;
-        font-size: 0.6rem;
-    }
-    
+
     .floating-card:nth-child(2) {
         top: 0%;
         left: 50%;
@@ -2380,10 +2411,7 @@ body {
         display: none;
     }
     
-    .center-profile-image {
-        width: 375px;
-        height: 375px;
-    }
+
     
     .instagram-feed {
         grid-template-columns: 1fr;

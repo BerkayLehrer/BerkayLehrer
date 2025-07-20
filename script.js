@@ -543,6 +543,162 @@ function setupPerformanceOptimizations() {
     });
 }
 
+// Instagram Embed Setup
+function setupInstagramEmbeds() {
+    const instagramFeed = document.getElementById('instagramFeed');
+    if (!instagramFeed) return;
+    
+    const instagramPosts = [
+        {
+            id: 'DMCmnEfMjyF',
+            embedUrl: 'https://www.instagram.com/reel/DMCmnEfMjyF/embed/',
+            caption: 'Almanya\'da eğitim fırsatları hakkında bilgi almak isteyenler için özel danışmanlık hizmeti veriyorum. 🇩🇪 #AlmanyaEğitimi #EğitimDanışmanlığı',
+            likes: 45,
+            comments: 12,
+            timestamp: '2 saat önce'
+        },
+        {
+            id: 'DLzrIHJMIQq',
+            embedUrl: 'https://www.instagram.com/reel/DLzrIHJMIQq/embed/',
+            caption: 'Almanya\'da üniversite eğitimi için gerekli belgeler ve başvuru süreçleri hakkında detaylı bilgi. 🎓 #AlmanyaÜniversite #EğitimDanışmanlığı',
+            likes: 52,
+            comments: 18,
+            timestamp: '4 saat önce'
+        },
+        {
+            id: 'DLw5Znws0dP',
+            embedUrl: 'https://www.instagram.com/reel/DLw5Znws0dP/embed/',
+            caption: 'Almanca dil sınavları ve sertifika programları ile kariyerinizi geliştirin. 📚 #AlmancaSınavları #DilEğitimi',
+            likes: 38,
+            comments: 9,
+            timestamp: '6 saat önce'
+        },
+        {
+            id: 'DMNPRHbs_li',
+            embedUrl: 'https://www.instagram.com/reel/DMNPRHbs_li/embed/',
+            caption: 'Almanya\'da çalışma vizesi ve iş bulma süreçleri hakkında uzman danışmanlık. 💼 #AlmanyaVizesi #İşDanışmanlığı',
+            likes: 67,
+            comments: 25,
+            timestamp: '1 gün önce'
+        },
+        {
+            id: 'DMKwOmAsw1_',
+            embedUrl: 'https://www.instagram.com/reel/DMKwOmAsw1_/embed/',
+            caption: 'Hukuki danışmanlık hizmetlerimizle haklarınızı koruyoruz. Profesyonel çözümler için bize ulaşın. ⚖️ #HukukiDanışmanlık #Avukat',
+            likes: 41,
+            comments: 11,
+            timestamp: '2 gün önce'
+        },
+        {
+            id: 'DMIMLdJM7L9',
+            embedUrl: 'https://www.instagram.com/reel/DMIMLdJM7L9/embed/',
+            caption: 'Başarılı öğrencilerimizle gurur duyuyoruz! Almanya\'da eğitim hayallerinizi gerçekleştirmek için yanınızdayız. 🎓 #BaşarıHikayeleri #EğitimBaşarısı',
+            likes: 73,
+            comments: 31,
+            timestamp: '3 gün önce'
+        }
+    ];
+    
+    instagramFeed.innerHTML = '';
+    
+    instagramPosts.forEach((post, index) => {
+        const postElement = createInstagramEmbedPost(post);
+        instagramFeed.appendChild(postElement);
+        
+        // Animasyon efekti
+        setTimeout(() => {
+            postElement.style.opacity = '1';
+            postElement.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+}
+
+function createInstagramEmbedPost(post) {
+    const postDiv = document.createElement('div');
+    postDiv.className = 'instagram-post';
+    postDiv.setAttribute('data-type', 'reel');
+    postDiv.style.opacity = '0';
+    postDiv.style.transform = 'translateY(20px)';
+    postDiv.style.transition = 'all 0.5s ease';
+    
+    postDiv.innerHTML = `
+        <div class="instagram-post-media">
+            <iframe 
+                src="${post.embedUrl}" 
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                scrolling="no" 
+                allowtransparency="true"
+                allowfullscreen="true"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="lazy"
+                class="instagram-embed"
+                referrerpolicy="no-referrer"
+                crossorigin="anonymous">
+            </iframe>
+            <div class="instagram-embed-overlay">
+                <div class="embed-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Instagram Reel yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+        <div class="instagram-post-content">
+            <div class="instagram-post-header">
+                <div class="instagram-post-avatar">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="instagram-post-info">
+                    <h4>@berkaylehrer</h4>
+                    <span>${post.timestamp}</span>
+                    <span class="post-type-badge">🎬 Reel</span>
+                </div>
+            </div>
+            <div class="instagram-post-caption">
+                ${post.caption}
+            </div>
+            <div class="instagram-post-stats">
+                <div class="instagram-post-stat">
+                    <i class="fas fa-heart"></i>
+                    <span>${post.likes}</span>
+                </div>
+                <div class="instagram-post-stat">
+                    <i class="fas fa-comment"></i>
+                    <span>${post.comments}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Embed yüklendiğinde overlay'i kaldır
+    const iframe = postDiv.querySelector('iframe');
+    const overlay = postDiv.querySelector('.instagram-embed-overlay');
+    
+    if (iframe && overlay) {
+        iframe.addEventListener('load', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        });
+        
+        iframe.addEventListener('error', () => {
+            overlay.innerHTML = `
+                <div class="embed-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Reel yüklenemedi</p>
+                    <a href="${post.embedUrl.replace('/embed/', '/')}" target="_blank" class="btn btn-primary">
+                        Instagram'da İzle
+                    </a>
+                </div>
+            `;
+        });
+    }
+    
+    return postDiv;
+}
+
 // Notification System
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
@@ -619,4 +775,9 @@ style.textContent = `
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Initialize Instagram Embeds when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupInstagramEmbeds();
+}); 

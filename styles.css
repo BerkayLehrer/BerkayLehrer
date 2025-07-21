@@ -143,23 +143,13 @@ body {
     margin: 0 auto var(--spacing-lg);
 }
 
-.logo-circle {
-    width: 100%;
-    height: 100%;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid white;
+.loading-logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-}
-
-.logo-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: white;
+    background: transparent;
 }
 
 .loading-progress {
@@ -219,27 +209,24 @@ body {
 
 .logo-icon {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.logo-icon .logo-circle {
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
+.nav-logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
     border-radius: 50%;
-    border: none;
-    animation: none;
+    transition: transform var(--transition-normal);
+    background: transparent;
 }
 
-.logo-icon span {
-    position: absolute;
-    font-size: var(--font-size-sm);
-    font-weight: 700;
-    color: white;
+.nav-logo-image:hover {
+    transform: scale(1.1);
 }
 
 .nav-logo h2 {
@@ -440,7 +427,8 @@ body {
     bottom: 0;
     /*background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);*/
     /*background : linear-gradient(135deg, rgb(29 31 37) 0%, rgba(29, 78, 216, 0.1) 100%)*/
-    background : linear-gradient(262deg, rgb(111 131 188 / 0%) 0%, rgba(29, 78, 216, 0.1) 100%)
+    /*background : linear-gradient(262deg, rgb(111 131 188 / 0%) 0%, rgba(29, 78, 216, 0.1) 100%)*/
+    background :linear-gradient(269deg, rgb(0 2 8 / 58%) 0%, rgb(255 255 255 / 42%) 100%);
 }
 
 @keyframes float {
@@ -692,10 +680,10 @@ body {
 .center-profile-image {
     width: 330px;
     height: 330px;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     object-fit: cover;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+    /*border: 4px solid rgba(255, 255, 255, 0.3);*/
+    /*box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);*/
     backdrop-filter: blur(10px);
 }
 
@@ -2012,16 +2000,31 @@ body {
 
 /* Footer */
 .footer {
-    background: var(--gradient-dark);
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
     color: white;
-    padding: var(--spacing-3xl) 0 var(--spacing-xl);
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-2xl);
-    margin-bottom: var(--spacing-2xl);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
 }
 
 .footer-logo {
@@ -2029,19 +2032,81 @@ body {
     align-items: center;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-logo-image {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: all var(--transition-normal);
+    background: transparent;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.footer-logo-image:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
 }
 
 .footer-logo h3 {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: white;
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.footer-section:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.footer-section p {
+    text-align: left;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
 }
 
 .footer-section h4 {
-    font-size: var(--font-size-lg);
+    text-align: left;
+    font-size: var(--font-size-base);
     font-weight: 600;
-    margin-bottom: var(--spacing-lg);
     color: white;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    padding-bottom: var(--spacing-xs);
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #3b82f6);
+    border-radius: 1px;
 }
 
 .footer-section ul {
@@ -2049,29 +2114,48 @@ body {
 }
 
 .footer-section ul li {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    padding-left: var(--spacing-sm);
+}
+
+.footer-section ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #60a5fa;
+    font-weight: bold;
+    transition: transform var(--transition-normal);
+}
+
+.footer-section ul li:hover::before {
+    transform: translateX(3px);
 }
 
 .footer-section ul li a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    transition: color var(--transition-normal);
+    transition: all var(--transition-normal);
+    display: inline-block;
+    padding: var(--spacing-xs) 0;
 }
 
 .footer-section ul li a:hover {
     color: white;
+    transform: translateX(5px);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .footer-social {
     display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
 }
 
 .footer-social .social-link {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2079,11 +2163,58 @@ body {
     color: white;
     text-decoration: none;
     transition: all var(--transition-normal);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-social .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.footer-social .social-link:hover::before {
+    left: 100%;
 }
 
 .footer-social .social-link:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Sosyal medya ikonları için özel renkler */
+.footer-social .social-link:nth-child(1):hover {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+    box-shadow: 0 8px 20px rgba(0, 119, 181, 0.4);
+}
+
+.footer-social .social-link:nth-child(2):hover {
+    background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+    box-shadow: 0 8px 20px rgba(29, 161, 242, 0.4);
+}
+
+.footer-social .social-link:nth-child(3):hover {
+    background: linear-gradient(135deg, #e4405f, #c13584);
+    box-shadow: 0 8px 20px rgba(228, 64, 95, 0.4);
+}
+
+.footer-social .social-link:nth-child(4):hover {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+.footer-social .social-link:nth-child(5):hover {
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
 }
 
 .footer-bottom {
@@ -2092,6 +2223,13 @@ body {
     align-items: center;
     padding-top: var(--spacing-xl);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 0 calc(-1 * var(--spacing-lg));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
 }
 
 .footer-links {
@@ -2103,18 +2241,38 @@ body {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-size: var(--font-size-sm);
-    transition: color var(--transition-normal);
+    transition: all var(--transition-normal);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    position: relative;
+}
+
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #3b82f6);
+    transition: all var(--transition-normal);
+    transform: translateX(-50%);
 }
 
 .footer-links a:hover {
     color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-links a:hover::before {
+    width: 80%;
 }
 
 /* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
@@ -2122,8 +2280,624 @@ body {
     }
 }
 
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px) rotate(-5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px) rotate(5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modern Scroll Animasyonları */
+@keyframes modernSlideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(20px) scale(0.98);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernSlideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-80px) translateY(20px) rotate(-3deg) scale(0.9);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateX(-20px) translateY(5px) rotate(-1deg) scale(0.95);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernSlideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(80px) translateY(20px) rotate(3deg) scale(0.9);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateX(20px) translateY(5px) rotate(1deg) scale(0.95);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) rotate(-5deg);
+        filter: blur(12px);
+    }
+    40% {
+        opacity: 0.6;
+        transform: scale(0.85) rotate(-2deg);
+        filter: blur(6px);
+    }
+    80% {
+        opacity: 0.9;
+        transform: scale(0.95) rotate(-0.5deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
+
+/* Modern Parça Birleşme Animasyonları */
+@keyframes modernAssembleLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-60px) translateY(-40px) rotate(-12deg) scale(0.6);
+        filter: blur(15px);
+    }
+    30% {
+        opacity: 0.4;
+        transform: translateX(-30px) translateY(-20px) rotate(-6deg) scale(0.75);
+        filter: blur(8px);
+    }
+    70% {
+        opacity: 0.8;
+        transform: translateX(-10px) translateY(-5px) rotate(-2deg) scale(0.9);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernAssembleRight {
+    0% {
+        opacity: 0;
+        transform: translateX(60px) translateY(-40px) rotate(12deg) scale(0.6);
+        filter: blur(15px);
+    }
+    30% {
+        opacity: 0.4;
+        transform: translateX(30px) translateY(-20px) rotate(6deg) scale(0.75);
+        filter: blur(8px);
+    }
+    70% {
+        opacity: 0.8;
+        transform: translateX(10px) translateY(-5px) rotate(2deg) scale(0.9);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernAssembleTop {
+    0% {
+        opacity: 0;
+        transform: translateX(-25px) translateY(-80px) rotate(-8deg) scale(0.4);
+        filter: blur(20px);
+    }
+    25% {
+        opacity: 0.3;
+        transform: translateX(-15px) translateY(-40px) rotate(-4deg) scale(0.6);
+        filter: blur(12px);
+    }
+    60% {
+        opacity: 0.7;
+        transform: translateX(-5px) translateY(-15px) rotate(-1deg) scale(0.8);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes modernAssembleBottom {
+    0% {
+        opacity: 0;
+        transform: translateX(25px) translateY(80px) rotate(8deg) scale(0.4);
+        filter: blur(20px);
+    }
+    25% {
+        opacity: 0.3;
+        transform: translateX(15px) translateY(40px) rotate(4deg) scale(0.6);
+        filter: blur(12px);
+    }
+    60% {
+        opacity: 0.7;
+        transform: translateX(5px) translateY(15px) rotate(1deg) scale(0.8);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+        filter: blur(0px);
+    }
+}
+
 .fade-in-up {
     animation: fadeInUp 0.8s ease-out;
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.fade-in-scale {
+    animation: fadeInScale 0.8s ease-out;
+}
+
+.slide-in-up {
+    animation: slideInUp 0.8s ease-out;
+}
+
+/* Modern Animasyon Sınıfları */
+.modern-slide-up {
+    animation: modernSlideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-slide-left {
+    animation: modernSlideInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-slide-right {
+    animation: modernSlideInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scale-in {
+    animation: modernScaleIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-fade-in {
+    animation: modernFadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-assemble-left {
+    animation: modernAssembleLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-assemble-right {
+    animation: modernAssembleRight 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-assemble-top {
+    animation: modernAssembleTop 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-assemble-bottom {
+    animation: modernAssembleBottom 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Modern Scroll Animasyonları - Başlangıç Durumu */
+.modern-scroll-up {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    filter: blur(10px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-up.animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-left {
+    opacity: 0;
+    transform: translateX(-80px) translateY(20px) rotate(-3deg) scale(0.9);
+    filter: blur(8px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-left.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-right {
+    opacity: 0;
+    transform: translateX(80px) translateY(20px) rotate(3deg) scale(0.9);
+    filter: blur(8px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-right.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-scale {
+    opacity: 0;
+    transform: scale(0.7) rotate(-5deg);
+    filter: blur(12px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-scale.animate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+}
+
+.modern-scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-fade.animate {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+}
+
+/* Modern Parça Birleşme Scroll Animasyonları */
+.modern-scroll-assemble-left {
+    opacity: 0;
+    transform: translateX(-60px) translateY(-40px) rotate(-12deg) scale(0.6);
+    filter: blur(15px);
+    transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-assemble-left.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-assemble-right {
+    opacity: 0;
+    transform: translateX(60px) translateY(-40px) rotate(12deg) scale(0.6);
+    filter: blur(15px);
+    transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-assemble-right.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-assemble-top {
+    opacity: 0;
+    transform: translateX(-25px) translateY(-80px) rotate(-8deg) scale(0.4);
+    filter: blur(20px);
+    transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-assemble-top.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+.modern-scroll-assemble-bottom {
+    opacity: 0;
+    transform: translateX(25px) translateY(80px) rotate(8deg) scale(0.4);
+    filter: blur(20px);
+    transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modern-scroll-assemble-bottom.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    filter: blur(0px);
+}
+
+/* Ters animasyonlar için geçiş efektleri */
+.scroll-animate,
+.scroll-animate-left,
+.scroll-animate-right,
+.scroll-animate-scale,
+.scroll-assemble-left,
+.scroll-assemble-right,
+.scroll-assemble-top,
+.scroll-assemble-bottom {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern Hover Efektleri */
+.modern-scroll-up:hover,
+.modern-scroll-left:hover,
+.modern-scroll-right:hover,
+.modern-scroll-scale:hover,
+.modern-scroll-fade:hover,
+.modern-scroll-assemble-left:hover,
+.modern-scroll-assemble-right:hover,
+.modern-scroll-assemble-top:hover,
+.modern-scroll-assemble-bottom:hover {
+    transform: translateY(-8px) scale(1.02);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Service Card Hover Efektleri */
+.service-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.service-card:hover .service-arrow {
+    transform: translateX(8px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hover durumunda animasyon sınıflarını geçersiz kılma */
+.service-card:hover.modern-scroll-assemble-left,
+.service-card:hover.modern-scroll-assemble-right,
+.service-card:hover.modern-scroll-assemble-top,
+.service-card:hover.modern-scroll-assemble-bottom {
+    transform: translateY(-12px) scale(1.03) !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+}
+
+/* Hover active sınıfı için özel kurallar */
+.service-card.hover-active {
+    transform: translateY(-12px) scale(1.03) !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.service-card.hover-active.modern-scroll-assemble-left,
+.service-card.hover-active.modern-scroll-assemble-right,
+.service-card.hover-active.modern-scroll-assemble-top,
+.service-card.hover-active.modern-scroll-assemble-bottom {
+    transform: translateY(-12px) scale(1.03) !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+}
+
+/* Service card içindeki elementler için hover efektleri */
+.service-card.hover-active .service-icon {
+    transform: scale(1.1) rotate(5deg) !important;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.service-card.hover-active .service-arrow {
+    transform: translateX(8px) !important;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* YouTube Video Kartları için Hover Efektleri */
+.youtube-video:hover {
+    transform: translateY(-8px) scale(1.02);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.youtube-video:hover .video-container {
+    transform: scale(1.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.youtube-video:hover .video-info h4 {
+    color: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* YouTube Video Hover Active Sınıfı */
+.youtube-video.hover-active {
+    transform: translateY(-8px) scale(1.02) !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.youtube-video.hover-active.modern-scroll-assemble-left,
+.youtube-video.hover-active.modern-scroll-assemble-right,
+.youtube-video.hover-active.modern-scroll-assemble-top,
+.youtube-video.hover-active.modern-scroll-assemble-bottom {
+    transform: translateY(-8px) scale(1.02) !important;
+    filter: blur(0px) !important;
+    opacity: 1 !important;
+}
+
+/* Instagram Feed için Hover Efektleri */
+.instagram-feed:hover {
+    transform: translateY(-5px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Video Container Hover Efektleri */
+.video-container:hover {
+    transform: scale(1.02);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Scroll yönüne göre farklı animasyonlar */
+body.scroll-up .scroll-animate,
+body.scroll-up .scroll-animate-left,
+body.scroll-up .scroll-animate-right,
+body.scroll-up .scroll-animate-scale,
+body.scroll-up .scroll-assemble-left,
+body.scroll-up .scroll-assemble-right,
+body.scroll-up .scroll-assemble-top,
+body.scroll-up .scroll-assemble-bottom {
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Yukarı scroll sırasında daha hızlı ve farklı animasyonlar */
+body.scroll-up .scroll-assemble-left.animate {
+    transform: translateX(-30px) translateY(-30px) rotate(-8deg) scale(0.9);
+    opacity: 0.8;
+}
+
+body.scroll-up .scroll-assemble-right.animate {
+    transform: translateX(30px) translateY(-30px) rotate(8deg) scale(0.9);
+    opacity: 0.8;
+}
+
+body.scroll-up .scroll-assemble-top.animate {
+    transform: translateX(-20px) translateY(-60px) rotate(-5deg) scale(0.7);
+    opacity: 0.6;
+}
+
+body.scroll-up .scroll-assemble-bottom.animate {
+    transform: translateX(20px) translateY(60px) rotate(5deg) scale(0.7);
+    opacity: 0.6;
+}
+
+/* Aşağı scroll sırasında normal animasyonlar */
+body.scroll-down .scroll-assemble-left.animate,
+body.scroll-down .scroll-assemble-right.animate,
+body.scroll-down .scroll-assemble-top.animate,
+body.scroll-down .scroll-assemble-bottom.animate {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
 }
 
 /* Responsive Design */
@@ -2361,6 +3135,11 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .footer-content {
+        grid-template-columns: 1.5fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
     .footer-bottom {
         flex-direction: column;
         gap: var(--spacing-lg);
@@ -2479,6 +3258,26 @@ body {
         font-size: var(--font-size-base);
         background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
         box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .footer-section {
+        padding: var(--spacing-sm);
+    }
+    
+    .footer-logo {
+        padding: var(--spacing-sm);
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-logo-image {
+        width: 60px;
+        height: 60px;
     }
     
     /* Resume Responsive */

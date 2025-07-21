@@ -123,7 +123,7 @@ function setupNavbarEffects() {
     });
 }
 
-// Intersection Observer for Animations
+// Intersection Observer for Scroll Animations
 function setupIntersectionObserver() {
     const observerOptions = {
         threshold: 0.1,
@@ -133,23 +133,40 @@ function setupIntersectionObserver() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
+                entry.target.classList.add('animate');
                 
-                // Add staggered animation for service cards
-                if (entry.target.classList.contains('service-card')) {
+                // Add staggered animation delay for service cards
+                if (entry.target.classList.contains('modern-scroll-assemble-left') || 
+                    entry.target.classList.contains('modern-scroll-assemble-right') || 
+                    entry.target.classList.contains('modern-scroll-assemble-top') || 
+                    entry.target.classList.contains('modern-scroll-assemble-bottom')) {
                     const cards = entry.target.parentElement.querySelectorAll('.service-card');
                     cards.forEach((card, index) => {
                         setTimeout(() => {
-                            card.classList.add('fade-in-up');
-                        }, index * 100);
+                            card.classList.add('animate');
+                        }, index * 400);
+                    });
+                }
+            } else {
+                // Remove animation class when element leaves viewport
+                entry.target.classList.remove('animate');
+                
+                // Remove animation from service cards when they leave viewport
+                if (entry.target.classList.contains('modern-scroll-assemble-left') || 
+                    entry.target.classList.contains('modern-scroll-assemble-right') || 
+                    entry.target.classList.contains('modern-scroll-assemble-top') || 
+                    entry.target.classList.contains('modern-scroll-assemble-bottom')) {
+                    const cards = entry.target.parentElement.querySelectorAll('.service-card');
+                    cards.forEach((card) => {
+                        card.classList.remove('animate');
                     });
                 }
             }
         });
     }, observerOptions);
 
-    // Observe elements for animation
-    const animateElements = document.querySelectorAll('.service-card, .stat-item, .contact-item, .about-content');
+    // Observe elements with modern scroll animation classes
+    const animateElements = document.querySelectorAll('.modern-scroll-up, .modern-scroll-left, .modern-scroll-right, .modern-scroll-scale, .modern-scroll-fade, .modern-scroll-assemble-left, .modern-scroll-assemble-right, .modern-scroll-assemble-top, .modern-scroll-assemble-bottom');
     animateElements.forEach(el => {
         observer.observe(el);
     });
@@ -461,17 +478,92 @@ function setupBackToTop() {
     });
 }
 
-// Service Card Effects
+// Modern Service Card Effects
 function setupServiceCardEffects() {
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px) scale(1.02)';
+            // Hover durumunda animasyon sınıflarını geçici olarak devre dışı bırak
+            card.classList.add('hover-active');
+            
+            // Service icon animasyonu
+            const icon = card.querySelector('.service-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+                icon.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+            
+            // Service arrow animasyonu
+            const arrow = card.querySelector('.service-arrow');
+            if (arrow) {
+                arrow.style.transform = 'translateX(8px)';
+                arrow.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
         });
         
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
+            // Hover bittiğinde animasyon sınıflarını geri etkinleştir
+            card.classList.remove('hover-active');
+            
+            // Service icon animasyonunu sıfırla
+            const icon = card.querySelector('.service-icon');
+            if (icon) {
+                icon.style.transform = '';
+                icon.style.transition = '';
+            }
+            
+            // Service arrow animasyonunu sıfırla
+            const arrow = card.querySelector('.service-arrow');
+            if (arrow) {
+                arrow.style.transform = '';
+                arrow.style.transition = '';
+            }
+        });
+    });
+}
+
+// Modern Video Card Effects
+function setupVideoCardEffects() {
+    const videoCards = document.querySelectorAll('.youtube-video');
+    
+    videoCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Hover durumunda animasyon sınıflarını geçici olarak devre dışı bırak
+            card.classList.add('hover-active');
+            
+            // Video container animasyonu
+            const container = card.querySelector('.video-container');
+            if (container) {
+                container.style.transform = 'scale(1.05)';
+                container.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+            
+            // Video info title animasyonu
+            const title = card.querySelector('.video-info h4');
+            if (title) {
+                title.style.color = 'var(--primary-color)';
+                title.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            // Hover bittiğinde animasyon sınıflarını geri etkinleştir
+            card.classList.remove('hover-active');
+            
+            // Video container animasyonunu sıfırla
+            const container = card.querySelector('.video-container');
+            if (container) {
+                container.style.transform = '';
+                container.style.transition = '';
+            }
+            
+            // Video info title animasyonunu sıfırla
+            const title = card.querySelector('.video-info h4');
+            if (title) {
+                title.style.color = '';
+                title.style.transition = '';
+            }
         });
     });
 }
@@ -891,6 +983,28 @@ function navigateToService(url) {
     }, 1000);
 }
 
+// Scroll Direction Tracking
+function setupScrollDirection() {
+    let lastScrollTop = 0;
+    let scrollDirection = 'down';
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (currentScrollTop > lastScrollTop) {
+            scrollDirection = 'down';
+        } else {
+            scrollDirection = 'up';
+        }
+        
+        lastScrollTop = currentScrollTop;
+        
+        // Add direction class to body for CSS targeting
+        document.body.classList.remove('scroll-down', 'scroll-up');
+        document.body.classList.add(`scroll-${scrollDirection}`);
+    });
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Remove loading screen when page is loaded
@@ -903,4 +1017,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }, 2000);
     }
+    
+    // Initialize scroll direction tracking
+    setupScrollDirection();
+    
+    // Initialize service card effects
+    setupServiceCardEffects();
+    
+    // Initialize video card effects
+    setupVideoCardEffects();
 }); 

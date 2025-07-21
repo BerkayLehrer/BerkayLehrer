@@ -1068,7 +1068,7 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+   /* border: 1px solid rgba(0, 0, 0, 0.05); */
 }
 
 .service-card::before {
@@ -1110,14 +1110,14 @@ body {
 }
 
 .service-content h3 {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: black;
     margin-bottom: var(--spacing-md);
 }
 
 .service-content p {
-    color: var(--secondary-color);
+    color: white;
     line-height: 1.6;
     margin-bottom: var(--spacing-lg);
 }
@@ -1130,17 +1130,18 @@ body {
 }
 
 .feature {
-    background: rgba(37, 99, 235, 0.1);
-    color: var(--primary-color);
+    background: rgb(27 27 27);
+    color: #ffffff;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
-    font-weight: 600;
+    font-weight: bold;
+
 }
 
 .service-arrow {
-    color: var(--primary-color);
-    font-size: var(--font-size-lg);
+    color: black;
+    font-size: var(--font-size-xl);
     transition: transform var(--transition-normal);
 }
 
@@ -3651,3 +3652,31 @@ body.scroll-down .scroll-assemble-bottom.animate {
         margin-bottom: var(--spacing-lg);
     }
 } 
+
+
+
+.hero-hukuk{
+    background: linear-gradient(93deg, rgb(0 0 0 / 59%) 0%, rgb(249 227 227 / 35%) 100%);
+}
+
+.hero-almanya-egitim-danismalik{
+    background: linear-gradient(93deg, rgb(202 71 71 / 81%) 0%, rgb(249 227 227 / 35%) 100%);
+}
+
+.hero-almanaca-dersleri{
+    background: linear-gradient(273deg, rgb(170 124 52 / 94%) 0%, rgb(249 227 227 / 35%) 100%);
+}
+
+
+
+.hero-hukuk-anaEkranKarti{
+    background: linear-gradient(359deg, rgb(0 0 0 / 59%) 0%, rgb(249 227 227 / 35%) 100%)
+}
+
+.hero-almanya-egitim-danismalik-anaEkranKarti{
+    background: linear-gradient(358deg, rgb(202 71 71 / 81%) 0%, rgb(249 227 227 / 35%) 100%);
+}
+
+.hero-almanaca-dersleri-anaEkranKarti{
+    background: linear-gradient(1deg, rgb(170 124 52 / 94%) 0%, rgb(249 227 227 / 35%) 100%);
+}

@@ -678,9 +678,9 @@ body {
 }
 
 .center-profile-image {
-    width: 330px;
-    height: 330px;
-    /*border-radius: 50%;*/
+    width: 280px;
+    height: 320px;
+    border-radius: 30%;
     object-fit: cover;
     /*border: 4px solid rgba(255, 255, 255, 0.3);*/
     /*box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);*/
@@ -3670,7 +3670,7 @@ body.scroll-down .scroll-assemble-bottom.animate {
 
 
 .hero-hukuk-anaEkranKarti{
-    background: linear-gradient(359deg, rgb(0 0 0 / 59%) 0%, rgb(249 227 227 / 35%) 100%)
+    background: linear-gradient(359deg, rgb(0 0 0 / 59%) 0%, rgb(249 227 227 / 35%) 100%);
 }
 
 .hero-almanya-egitim-danismalik-anaEkranKarti{

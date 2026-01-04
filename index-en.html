@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Berkay Kan | Law Services</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/BerkayKan_Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/BerkayKan_Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/BerkayKan_Logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Cairo:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="index-en.html" class="logo">
+                <img class="logo-light" src="images/BerkayKanLogoLightMode.png" alt="Law Firm Logo">
+                <img class="logo-dark" src="images/BerkayKanLogoDarkMode.png" alt="Law Firm Logo">
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <!--<li><a href="#hero">Home</a></li>-->
+                    <li><a href="#about">About Us</a></li>
+                    <li class="has-submenu"><a href="#">Our Services</a>
+                        <ul class="sub-menu">
+                            <li class="has-submenu-2">
+                                <a href="#" class="submenu-parent">Turkish-German Law <i class="fa-solid fa-chevron-right"></i></a>
+                                <ul class="sub-menu-2">
+                                    <li><a href="#" class="service-link" data-service="bosanma-hukuku">Divorce Law</a></li>
+                                    <li><a href="#" class="service-link" data-service="miras-hukuku">Inheritance Law</a></li>
+                                    <li><a href="#" class="service-link" data-service="ceza-hukuku">Criminal Law</a></li>
+                                    <li><a href="#" class="service-link" data-service="is-hukuku">Labor Law</a></li>
+                                    <li><a href="#" class="service-link" data-service="ticaret-hukuku">Commercial Law</a></li>
+                                    <li><a href="#" class="service-link" data-service="sozlesme-hukuku">Contract Law</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu-2">
+                                <a href="#" class="submenu-parent">Germany Immigration Consultancy <i class="fa-solid fa-chevron-right"></i></a>
+                                <ul class="sub-menu-2">
+                                    <li><a href="#" class="service-link" data-service="mesleki-denklik">Professional Recognition</a></li>
+                                    <li><a href="#" class="service-link" data-service="ausbildung">Ausbildung</a></li>
+                                    <li><a href="#" class="service-link" data-service="aile-birlesimi-vizesi">Family Reunification Visa</a></li>
+                                    <li><a href="#" class="service-link" data-service="egitim-sureci">Education Process</a></li>
+                                    <li><a href="#" class="service-link" data-service="calisma-ve-oturum-izni">Work and Residence Permit</a></li>
+                                    <li><a href="#" class="service-link" data-service="sirket-kurulumu">Company Formation</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#announcements">Announcements</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#career">Career</a></li>
+                    <li class="has-submenu"><a href="#contact">Contact</a>
+                        <ul class="sub-menu">
+                            <li><a href="#contact#location">Address</a></li>
+                            <li><a href="#contact#phone">Phone</a></li>
+                            <li><a href="#contact#email">Email</a></li>
+                        </ul>
+                    </li>
+                    <li class="mobile-language-links">
+                        <div class="language-links">
+                            <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                            <a href="index-en.html" class="active"><img src="icons/EN.png" alt="EN"> EN</a>
+                            <a href="index-de.html"><img src="icons/DE.png" alt="DE"> DE</a>
+                            <a href="index-ar.html"><img src="icons/AR.png" alt="AR"> AR</a>
+                        </div>
+                    </li>
+                    <li class="mobile-theme-toggle">
+                        <button id="mobileThemeToggle" class="theme-btn" aria-label="Toggle Theme">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-links">
+                    <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                    <a href="index-en.html" class="active"><img src="icons/EN.png" alt="EN"> EN</a>
+                    <a href="index-de.html"><img src="icons/DE.png" alt="DE"> DE</a>
+                    <a href="index-ar.html"><img src="icons/AR.png" alt="AR"> AR</a>
+                </div>
+                <div class="language-dropdown-wrapper">
+                    <select id="languageDropdown" class="language-dropdown" aria-label="Select Language">
+                        <option value="index.html" data-icon="icons/TR.png">TR</option>
+                        <option value="index-en.html" data-icon="icons/EN.png">EN</option>
+                        <option value="index-de.html" data-icon="icons/DE.png">DE</option>
+                        <option value="index-ar.html" data-icon="icons/AR.png">AR</option>
+                    </select>
+                    <div class="language-dropdown-custom">
+                        <div class="language-dropdown-selected">
+                            <img src="icons/EN.png" alt="" class="language-flag">
+                            <span class="language-text">EN</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="language-dropdown-options">
+                            <div class="language-option" data-value="index.html" data-icon="icons/TR.png">
+                                <img src="icons/TR.png" alt="TR" class="language-flag">
+                                <span>TR</span>
+                            </div>
+                            <div class="language-option" data-value="index-en.html" data-icon="icons/EN.png">
+                                <img src="icons/EN.png" alt="EN" class="language-flag">
+                                <span>EN</span>
+                            </div>
+                            <div class="language-option" data-value="index-de.html" data-icon="icons/DE.png">
+                                <img src="icons/DE.png" alt="DE" class="language-flag">
+                                <span>DE</span>
+                            </div>
+                            <div class="language-option" data-value="index-ar.html" data-icon="icons/AR.png">
+                                <img src="icons/AR.png" alt="AR" class="language-flag">
+                                <span>AR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <img src="images/BerkayKanHero.jpeg" alt="BK Partners" class="hero-image">
+            <div class="hero-overlay"></div>
+        </section>
+
+        <div id="about" class="section-wrapper">
+            <section class="section" aria-labelledby="about-title">
+                <div class="container">
+        
+                    <!-- H1: Main page title -->
+                    <h1 id="about-title" class="section-title">
+                        Germany Immigration Consultancy and Legal Support <br> BK Partners
+                    </h1>
+        
+                    <div class="about-content">
+                        <div class="about-intro">
+                            <!-- H2 -->
+                            <h2 class="about-subtitle">
+                                We Are With You on Your Journey to Germany
+                            </h2>
+                            <p class="about-description">
+                                As BK Partners, we provide legal consultancy services in the fields of family law, divorce, inheritance, immigration, and foreign nationals law.
+                                In addition, we provide <strong>Germany immigration consultancy</strong> services to individuals who want to settle in Germany.
+                            </p>
+                        </div>
+        
+                        <div class="about-sections">
+        
+                            <!-- Germany Immigration -->
+                            <article class="about-section">
+                                <div class="about-section-header">
+                                    <i class="fa-solid fa-plane-departure"></i>
+                                    <h3>
+                                        Immigration to Germany: Not Just an Application, but a Roadmap
+                                    </h3>
+                                </div>
+        
+                                <p>
+                                    Immigrating to Germany is often a complex and daunting process.
+                                    Which path is right, where to start, and the consequences of possible errors
+                                    can be challenging without professional support.
+                                </p>
+        
+                                <p>
+                                    We plan the <strong>Germany visa and immigration process</strong> step by step together, especially in the following areas:
+                                </p>
+        
+                                <ul class="about-list">
+                                    <li><i class="fa-solid fa-check"></i> Immigration to Germany through Ausbildung (vocational training)</li>
+                                    <li><i class="fa-solid fa-check"></i> Germany work visa and qualified workforce immigration</li>
+                                    <li><i class="fa-solid fa-check"></i> EU Blue Card applications</li>
+                                    <li><i class="fa-solid fa-check"></i> Germany student visa applications</li>
+                                    <li><i class="fa-solid fa-check"></i> Germany family reunification visa</li>
+                                    <li><i class="fa-solid fa-check"></i> Germany foreign nationals law applications and appeals</li>
+                                </ul>
+        
+                                <p>
+                                    The immigration process to Germany requires the joint evaluation of the right profession choice, equivalence procedures, language level,
+                                    and visa stages.
+                                    Our goal is to make this process more understandable, safer, and less stressful for you.
+                                </p>
+                            </article>
+        
+                            <!-- Family Law -->
+                            <article class="about-section">
+                                <div class="about-section-header">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                    <h3>
+                                        Germany-Related Family, Divorce, and Inheritance Law
+                                    </h3>
+                                </div>
+        
+                                <p>
+                                    Family law cases coincide with the most sensitive periods in people's lives.
+                                    Therefore, our approach in family law, divorce, and inheritance cases is always clear:
+                                </p>
+        
+                                <div class="about-highlight">
+                                    <p>
+                                        <strong>Open communication, realistic expectations, and a solid legal foundation.</strong>
+                                    </p>
+                                </div>
+        
+                                <p>
+                                    Especially in <strong>Germany-related marriage, divorce, and inheritance law</strong> matters,
+                                    working with a lawyer who knows the laws of both countries ensures a healthier progression of the process.
+                                </p>
+                            </article>
+        
+                            <!-- Why Us -->
+                            <article class="about-section">
+                                <div class="about-section-header">
+                                    <i class="fa-solid fa-handshake"></i>
+                                    <h3>
+                                        What to Expect When Working With Us?
+                                    </h3>
+                                </div>
+        
+                                <ul class="about-list">
+                                    <li><i class="fa-solid fa-check"></i> Solutions specific to your situation, not based on ready-made templates</li>
+                                    <li><i class="fa-solid fa-check"></i> Understandable language and clear legal answers</li>
+                                    <li><i class="fa-solid fa-check"></i> Transparent information at every stage of the process</li>
+                                    <li><i class="fa-solid fa-check"></i> Legal support from lawyers who know German practice</li>
+                                </ul>
+        
+                                <p class="about-conclusion">
+                                    For us, each case is not just a legal procedure,
+                                    but an important turning point in a person's life.
+                                    Our goal is not to leave you alone on your journey to Germany
+                                    and to carry out the process together with confidence.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="services" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-tabs">
+                    <!-- Tab Butonları -->
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="hukuk">Turkish-German Law</button>
+                        <button class="tab-button" data-tab="goc">Germany Immigration Consultancy</button>
+                    </div>
+                    
+                    <!-- Tab İçerikleri -->
+                    <div class="tab-content-wrapper">
+                        <!-- Turkish-German Law Kategorisi -->
+                        <div class="tab-content active" id="hukuk-tab">
+                            <div class="services-grid">
+                                <div class="service-card" data-service="bosanma-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-heart-crack"></i></div>
+                                        <h4>Divorce Law</h4>
+                                    </div>
+                                    <p>Managing a Difficult Process More Healthily</p>
+                                    <button class="btn-detail" data-service="bosanma-hukuku">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="miras-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-scroll"></i></div>
+                                        <h4>Inheritance Law</h4>
+                                    </div>
+                                    <p>Clear Solutions in Cross-Border Cases</p>
+                                    <button class="btn-detail" data-service="miras-hukuku">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="ceza-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-gavel"></i></div>
+                                        <h4>Criminal Law</h4>
+                                    </div>
+                                    <p>Reliable, Determined and Principled Defense in Turkey</p>
+                                    <button class="btn-detail" data-service="ceza-hukuku">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="is-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                                        <h4>Labor Law</h4>
+                                    </div>
+                                    <p>Managing Working Life Correctly Between Turkey and Germany</p>
+                                    <button class="btn-detail" data-service="is-hukuku">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="ticaret-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+                                        <h4>Commercial Law</h4>
+                                    </div>
+                                    <p>Doing Business Safely on the Turkey-Germany Line</p>
+                                    <button class="btn-detail" data-service="ticaret-hukuku">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="sozlesme-hukuku">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-file-contract"></i></div>
+                                        <h4>Contract Law</h4>
+                                    </div>
+                                    <p>Two Countries, One Strategy</p>
+                                    <button class="btn-detail" data-service="sozlesme-hukuku">Show Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Germany Immigration Consultancy Kategorisi -->
+                        <div class="tab-content" id="goc-tab">
+                            <div class="services-grid">
+                                <div class="service-card" data-service="mesleki-denklik">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-passport"></i></div>
+                                        <h4>Professional Recognition</h4>
+                                    </div>
+                                    <p>Making Your Profession Valid in Germany</p>
+                                    <button class="btn-detail" data-service="mesleki-denklik">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="ausbildung">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-plane"></i></div>
+                                        <h4>Ausbildung</h4>
+                                    </div>
+                                    <p>A profession in Germany, a future</p>
+                                    <button class="btn-detail" data-service="ausbildung">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="aile-birlesimi-vizesi">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-users"></i></div>
+                                        <h4>Family Reunification Visa</h4>
+                                    </div>
+                                    <p>Together again with your loved ones</p>
+                                    <button class="btn-detail" data-service="aile-birlesimi-vizesi">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="egitim-sureci">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                                        <h4>Education Process</h4>
+                                    </div>
+                                    <p>German consultancy: Strong cooperation with Foreign Language Academy</p>
+                                    <button class="btn-detail" data-service="egitim-sureci">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="calisma-ve-oturum-izni">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-building"></i></div>
+                                        <h4>Work and Residence Permit</h4>
+                                    </div>
+                                    <p>Blue Card and Skilled Immigration Act</p>
+                                    <button class="btn-detail" data-service="calisma-ve-oturum-izni">Show Details</button>
+                                </div>
+                                <div class="service-card" data-service="sirket-kurulumu">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-globe"></i></div>
+                                        <h4>Company Formation</h4>
+                                    </div>
+                                    <p>Which company type is right for me?</p>
+                                    <button class="btn-detail" data-service="sirket-kurulumu">Show Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <div id="team" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">Our Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member" data-member="berkay-kan">
+                            <div class="member-image">
+                                <img src="images/BerkayKan.jpg" alt="Atty. Berkay Kan">
+                            </div>
+                            <div class="member-info">
+                                <h3 class="member-name">Atty. Berkay Kan</h3>
+                                <p class="member-title">Founding Partner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="contact" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">Contact</h2>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="social-media">
+                        <a href="https://wa.me/905356812413" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.instagram.com/berkaylehrer/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Turkish-German Law Contact -->
+                    <div class="contact-section">
+                        <h3 class="contact-section-title">Turkish-German Law</h3>
+                        <div class="contact-wrapper">
+                            <div class="contact-info">
+                                <div class="info-item">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>Istanbul, Turkey</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>+90 535 681 24 13</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span>av.berkaykan@gmail.com</span>
+                                </div>
+                            </div>
+                            <form class="contact-form">
+                                <input type="text" placeholder="Your Name" required>
+                                <input type="email" placeholder="Your Email" required>
+                                <textarea rows="5" placeholder="Your Message" required></textarea>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Germany Immigration Consultancy Contact -->
+                    <div class="contact-section">
+                        <h3 class="contact-section-title">Germany Immigration Consultancy</h3>
+                        <div class="contact-wrapper">
+                            <div class="contact-info">
+                                <div class="info-item">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>Istanbul, Turkey</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>+90 535 681 24 13</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span>av.berkaykan@gmail.com</span>
+                                </div>
+                            </div>
+                            <form class="contact-form">
+                                <input type="text" placeholder="Your Name" required>
+                                <input type="email" placeholder="Your Email" required>
+                                <textarea rows="5" placeholder="Your Message" required></textarea>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.74949010803!2d28.9784!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAwJzI5LjUiTiAyOMKwNTgnNDIuMiJF!5e0!3m2!1str!2str!4v1234567890123!5m2!1str!2str" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Service Detail Popup -->
+    <div id="servicePopup" class="service-popup">
+        <div class="popup-overlay"></div>
+        <div class="popup-content">
+            <button class="popup-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="popup-header">
+                <div class="popup-icon"></div>
+                <h2 class="popup-title"></h2>
+            </div>
+            <div class="popup-body">
+                <div id="popupContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Member Popup -->
+    <div id="teamPopup" class="service-popup">
+        <div class="popup-overlay"></div>
+        <div class="popup-content">
+            <button class="popup-close team-popup-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="popup-header">
+                <div class="team-popup-image"></div>
+                <div class="team-popup-info">
+                    <h2 class="team-popup-name"></h2>
+                    <p class="team-popup-title"></p>
+                </div>
+            </div>
+            <div class="popup-body">
+                <div id="teamPopupContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Berkay Kan Partners. <span>All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

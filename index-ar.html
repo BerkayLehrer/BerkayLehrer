@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محامي بركاي كان | الاستشارات القانونية</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/BerkayKan_Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/BerkayKan_Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/BerkayKan_Logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Cairo:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="index-ar.html" class="logo">
+                <img class="logo-light" src="images/BerkayKanLogoLightMode.png" alt="شعار مكتب المحاماة">
+                <img class="logo-dark" src="images/BerkayKanLogoDarkMode.png" alt="شعار مكتب المحاماة">
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <!--<li><a href="#hero">الرئيسية</a></li>-->
+                    <li><a href="#about">من نحن</a></li>
+                    <li class="has-submenu"><a href="#services">خدماتنا</a>
+                        <ul class="sub-menu">
+                            <li><a href="#services#divorce">قانون الطلاق</a></li>
+                            <li><a href="#services#inheritance">قانون الميراث</a></li>
+                            <li><a href="#services#germany-immigration">استشارات الهجرة إلى ألمانيا</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#team">فريقنا</a></li>
+                    <li><a href="#announcements">الإعلانات</a></li>
+                    <li><a href="#publications">المنشورات</a></li>
+                    <li><a href="#events">الفعاليات</a></li>
+                    <li><a href="#career">الوظائف</a></li>
+                    <li class="has-submenu"><a href="#contact">اتصل بنا</a>
+                        <ul class="sub-menu">
+                            <li><a href="#contact#location">العنوان</a></li>
+                            <li><a href="#contact#phone">الهاتف</a></li>
+                            <li><a href="#contact#email">البريد الإلكتروني</a></li>
+                        </ul>
+                    </li>
+                    <li class="mobile-language-links">
+                        <div class="language-links">
+                            <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                            <a href="index-en.html"><img src="icons/EN.png" alt="EN"> EN</a>
+                            <a href="index-de.html"><img src="icons/DE.png" alt="DE"> DE</a>
+                            <a href="index-ar.html" class="active"><img src="icons/AR.png" alt="AR"> AR</a>
+                        </div>
+                    </li>
+                    <li class="mobile-theme-toggle">
+                        <button id="mobileThemeToggle" class="theme-btn" aria-label="Toggle Theme">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-links">
+                    <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                    <a href="index-en.html"><img src="icons/EN.png" alt="EN"> EN</a>
+                    <a href="index-de.html"><img src="icons/DE.png" alt="DE"> DE</a>
+                    <a href="index-ar.html" class="active"><img src="icons/AR.png" alt="AR"> AR</a>
+                </div>
+                <div class="language-dropdown-wrapper">
+                    <select id="languageDropdown" class="language-dropdown" aria-label="Select Language">
+                        <option value="index.html" data-icon="icons/TR.png">TR</option>
+                        <option value="index-en.html" data-icon="icons/EN.png">EN</option>
+                        <option value="index-de.html" data-icon="icons/DE.png">DE</option>
+                        <option value="index-ar.html" data-icon="icons/AR.png">AR</option>
+                    </select>
+                    <div class="language-dropdown-custom">
+                        <div class="language-dropdown-selected">
+                            <img src="icons/AR.png" alt="" class="language-flag">
+                            <span class="language-text">AR</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="language-dropdown-options">
+                            <div class="language-option" data-value="index.html" data-icon="icons/TR.png">
+                                <img src="icons/TR.png" alt="TR" class="language-flag">
+                                <span>TR</span>
+                            </div>
+                            <div class="language-option" data-value="index-en.html" data-icon="icons/EN.png">
+                                <img src="icons/EN.png" alt="EN" class="language-flag">
+                                <span>EN</span>
+                            </div>
+                            <div class="language-option" data-value="index-de.html" data-icon="icons/DE.png">
+                                <img src="icons/DE.png" alt="DE" class="language-flag">
+                                <span>DE</span>
+                            </div>
+                            <div class="language-option" data-value="index-ar.html" data-icon="icons/AR.png">
+                                <img src="icons/AR.png" alt="AR" class="language-flag">
+                                <span>AR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="videos/AnaSayfaVideo.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <!--
+            <div class="container hero-content">
+                <h1>نحن بجانبك من أجل العدالة والثقة</h1>
+                <p>خدمات الاستشارات القانونية والتمثيل المهني.</p>
+                <a href="#contact" class="btn btn-primary">اتصل بنا</a>
+            </div>
+            -->
+        </section>
+
+        <div id="about" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">من نحن</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>مع سنوات من الخبرة والمعرفة، نقدم لعملائنا الحلول القانونية الأكثر دقة. نحن بجانبك في نضالك
+                                القانوني بصدقنا وشفافيتنا ونهجنا الموجه نحو العميل.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="services" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                <h2 class="section-title">مجالات خبرتنا</h2>
+                <div class="services-tabs">
+                    <!-- Tab Butonları -->
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="qanun">القانون</button>
+                        <button class="tab-button" data-tab="hijra">استشارات الهجرة</button>
+                    </div>
+                    
+                    <!-- Tab İçerikleri -->
+                    <div class="tab-content-wrapper">
+                        <!-- القانون Kategorisi -->
+                        <div class="tab-content active" id="qanun-tab">
+                            <div class="services-grid">
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-heart-crack"></i></div>
+                                        <h4>قانون الطلاق</h4>
+                                    </div>
+                                    <p>دعم مهني في قضايا الطلاق التوافقي والمتنازع عليه، والحضانة، والنفقة، وتقسيم الممتلكات.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-scroll"></i></div>
+                                        <h4>قانون الميراث</h4>
+                                    </div>
+                                    <p>الاستشارات القانونية في إعداد الوصية، وتقسيم الميراث، وشهادة الميراث، ودعاوى الميراث.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-gavel"></i></div>
+                                        <h4>القانون الجنائي</h4>
+                                    </div>
+                                    <p>الدعم القانوني المهني في الدفاع، والشكاوى الجنائية، والاستئناف، وإجراءات النقض في القضايا الجنائية.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                                        <h4>قانون العمل</h4>
+                                    </div>
+                                    <p>الاستشارات القانونية في عقود العمل، والفصل من العمل، وحقوق التعويض، ونزاعات العامل-صاحب العمل.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+                                        <h4>القانون التجاري</h4>
+                                    </div>
+                                    <p>الاستشارات حول تأسيس الشركات، والعقود التجارية، والنزاعات التجارية، ومسائل القانون التجاري.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-file-contract"></i></div>
+                                        <h4>قانون العقود</h4>
+                                    </div>
+                                    <p>الدعم القانوني في صياغة العقود، ومراجعة العقود، وانتهاكات العقود، ونزاعات العقود.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- استشارات الهجرة Kategorisi -->
+                        <div class="tab-content" id="hijra-tab">
+                            <div class="services-grid">
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-passport"></i></div>
+                                        <h4>استشارات الهجرة إلى ألمانيا</h4>
+                                    </div>
+                                    <p>توجيه الخبراء للعمل، وتصاريح الإقامة، ولم شمل الأسرة، وطلبات الجنسية في ألمانيا.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-plane"></i></div>
+                                        <h4>استشارات الهجرة إلى الاتحاد الأوروبي</h4>
+                                    </div>
+                                    <p>خدمة استشارية شاملة لتصاريح الإقامة، وتصاريح العمل، وطلبات الجنسية في دول الاتحاد الأوروبي.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-users"></i></div>
+                                        <h4>لم شمل الأسرة</h4>
+                                    </div>
+                                    <p>الدعم المهني لطلبات لم شمل الأسرة، وإعداد المستندات المطلوبة، ومتابعة العملية.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                                        <h4>استشارات تأشيرة الطالب</h4>
+                                    </div>
+                                    <p>توجيه الخبراء لطلبات تأشيرة الطالب والعمليات المطلوبة للتعليم في الخارج.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-building"></i></div>
+                                        <h4>تأشيرة العمل وتصريح العمل</h4>
+                                    </div>
+                                    <p>الاستشارات التفصيلية ودعم الطلبات لتصاريح العمل وطلبات تأشيرة العمل في الخارج.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-globe"></i></div>
+                                        <h4>طلبات الجنسية</h4>
+                                    </div>
+                                    <p>الاستشارات القانونية الشاملة حول عمليات طلب الجنسية، والشروط المطلوبة، والمستندات.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <div id="contact" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">اتصل بنا</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>إسطنبول، تركيا</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+90 555 123 45 67</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>info@hukukburosu.com</span>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="اسمك" required>
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <textarea rows="5" placeholder="رسالتك" required></textarea>
+                        <button type="submit" class="btn btn-primary">إرسال</button>
+                    </form>
+                </div>
+            </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 مكتب المحاماة. <span>جميع الحقوق محفوظة.</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

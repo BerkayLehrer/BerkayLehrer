@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechtsanwalt Berkay Kan | Rechtliche Beratung</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/BerkayKan_Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/BerkayKan_Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/BerkayKan_Logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Cairo:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="index-de.html" class="logo">
+                <img class="logo-light" src="images/BerkayKanLogoLightMode.png" alt="Anwaltskanzlei Logo">
+                <img class="logo-dark" src="images/BerkayKanLogoDarkMode.png" alt="Anwaltskanzlei Logo">
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <!--<li><a href="#hero">Startseite</a></li>-->
+                    <li><a href="#about">Über Uns</a></li>
+                    <li class="has-submenu"><a href="#services">Unsere Dienstleistungen</a>
+                        <ul class="sub-menu">
+                            <li><a href="#services#divorce">Scheidungsrecht</a></li>
+                            <li><a href="#services#inheritance">Erbrecht</a></li>
+                            <li><a href="#services#germany-immigration">Deutschland Einwanderung</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#team">Unser Team</a></li>
+                    <li><a href="#announcements">Ankündigungen</a></li>
+                    <li><a href="#publications">Veröffentlichungen</a></li>
+                    <li><a href="#events">Veranstaltungen</a></li>
+                    <li><a href="#career">Karriere</a></li>
+                    <li class="has-submenu"><a href="#contact">Kontakt</a>
+                        <ul class="sub-menu">
+                            <li><a href="#contact#location">Adresse</a></li>
+                            <li><a href="#contact#phone">Telefon</a></li>
+                            <li><a href="#contact#email">E-Mail</a></li>
+                        </ul>
+                    </li>
+                    <li class="mobile-language-links">
+                        <div class="language-links">
+                            <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                            <a href="index-en.html"><img src="icons/EN.png" alt="EN"> EN</a>
+                            <a href="index-de.html" class="active"><img src="icons/DE.png" alt="DE"> DE</a>
+                            <a href="index-ar.html"><img src="icons/AR.png" alt="AR"> AR</a>
+                        </div>
+                    </li>
+                    <li class="mobile-theme-toggle">
+                        <button id="mobileThemeToggle" class="theme-btn" aria-label="Toggle Theme">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-links">
+                    <a href="index.html"><img src="icons/TR.png" alt="TR"> TR</a>
+                    <a href="index-en.html"><img src="icons/EN.png" alt="EN"> EN</a>
+                    <a href="index-de.html" class="active"><img src="icons/DE.png" alt="DE"> DE</a>
+                    <a href="index-ar.html"><img src="icons/AR.png" alt="AR"> AR</a>
+                </div>
+                <div class="language-dropdown-wrapper">
+                    <select id="languageDropdown" class="language-dropdown" aria-label="Select Language">
+                        <option value="index.html" data-icon="icons/TR.png">TR</option>
+                        <option value="index-en.html" data-icon="icons/EN.png">EN</option>
+                        <option value="index-de.html" data-icon="icons/DE.png">DE</option>
+                        <option value="index-ar.html" data-icon="icons/AR.png">AR</option>
+                    </select>
+                    <div class="language-dropdown-custom">
+                        <div class="language-dropdown-selected">
+                            <img src="icons/DE.png" alt="" class="language-flag">
+                            <span class="language-text">DE</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="language-dropdown-options">
+                            <div class="language-option" data-value="index.html" data-icon="icons/TR.png">
+                                <img src="icons/TR.png" alt="TR" class="language-flag">
+                                <span>TR</span>
+                            </div>
+                            <div class="language-option" data-value="index-en.html" data-icon="icons/EN.png">
+                                <img src="icons/EN.png" alt="EN" class="language-flag">
+                                <span>EN</span>
+                            </div>
+                            <div class="language-option" data-value="index-de.html" data-icon="icons/DE.png">
+                                <img src="icons/DE.png" alt="DE" class="language-flag">
+                                <span>DE</span>
+                            </div>
+                            <div class="language-option" data-value="index-ar.html" data-icon="icons/AR.png">
+                                <img src="icons/AR.png" alt="AR" class="language-flag">
+                                <span>AR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="videos/AnaSayfaVideo.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <!--
+            <div class="container hero-content">
+                <h1>Wir stehen für Gerechtigkeit und Vertrauen</h1>
+                <p>Professionelle Rechtsberatung und Vertretungsdienste.</p>
+                <a href="#contact" class="btn btn-primary">Kontaktieren Sie uns</a>
+            </div>
+            -->
+        </section>
+
+        <div id="about" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">Über Uns</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Mit jahrelanger Erfahrung und Wissen bieten wir unseren Mandanten die genauesten rechtlichen
+                                Lösungen. Wir stehen Ihnen in Ihrem Rechtsstreit mit unserer Ehrlichkeit, Transparenz und
+                                mandantenorientierten Ansatz zur Seite.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="services" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                <h2 class="section-title">Unsere Expertise</h2>
+                <div class="services-tabs">
+                    <!-- Tab Butonları -->
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="recht">Recht</button>
+                        <button class="tab-button" data-tab="einwanderung">Einwanderungsberatung</button>
+                    </div>
+                    
+                    <!-- Tab İçerikleri -->
+                    <div class="tab-content-wrapper">
+                        <!-- Recht Kategorisi -->
+                        <div class="tab-content active" id="recht-tab">
+                            <div class="services-grid">
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-heart-crack"></i></div>
+                                        <h4>Scheidungsrecht</h4>
+                                    </div>
+                                    <p>Professionelle Unterstützung bei einvernehmlichen und streitigen Scheidungsverfahren,
+                                        Sorgerecht, Unterhalt und Vermögensaufteilung.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-scroll"></i></div>
+                                        <h4>Erbrecht</h4>
+                                    </div>
+                                    <p>Rechtsberatung bei der Testamentserstellung, Erbteilung, Erbschein und Erbschaftsklagen.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-gavel"></i></div>
+                                        <h4>Strafrecht</h4>
+                                    </div>
+                                    <p>Professionelle rechtliche Unterstützung bei Verteidigung, Strafanzeigen, Berufungen und
+                                        Revisionen in Strafsachen.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                                        <h4>Arbeitsrecht</h4>
+                                    </div>
+                                    <p>Rechtsberatung bei Arbeitsverträgen, Kündigungen, Entschädigungsrechten und
+                                        Arbeitgeber-Arbeitnehmer-Streitigkeiten.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+                                        <h4>Handelsrecht</h4>
+                                    </div>
+                                    <p>Beratung zu Unternehmensgründung, Handelsverträgen, Handelsstreitigkeiten und
+                                        Handelsrechtsangelegenheiten.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-file-contract"></i></div>
+                                        <h4>Vertragsrecht</h4>
+                                    </div>
+                                    <p>Rechtliche Unterstützung bei Vertragserstellung, Vertragsprüfung, Vertragsverletzungen
+                                        und Vertragsstreitigkeiten.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Einwanderungsberatung Kategorisi -->
+                        <div class="tab-content" id="einwanderung-tab">
+                            <div class="services-grid">
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-passport"></i></div>
+                                        <h4>Deutschland Einwanderungsberatung</h4>
+                                    </div>
+                                    <p>Expertenberatung für Arbeit, Aufenthaltserlaubnis, Familienzusammenführung und
+                                        Einbürgerungsanträge in Deutschland.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-plane"></i></div>
+                                        <h4>Europäische Union Einwanderungsberatung</h4>
+                                    </div>
+                                    <p>Umfassende Beratungsdienstleistungen für Aufenthaltserlaubnis, Arbeitserlaubnis und
+                                        Einbürgerungsanträge in EU-Ländern.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-users"></i></div>
+                                        <h4>Familienzusammenführung</h4>
+                                    </div>
+                                    <p>Professionelle Unterstützung bei Anträgen zur Familienzusammenführung, Vorbereitung
+                                        erforderlicher Dokumente und Prozessverfolgung.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                                        <h4>Studentenvisum Beratung</h4>
+                                    </div>
+                                    <p>Expertenberatung für Studentenvisumanträge und erforderliche Prozesse für Bildung im
+                                        Ausland.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-building"></i></div>
+                                        <h4>Arbeitsvisum und Arbeitserlaubnis</h4>
+                                    </div>
+                                    <p>Detaillierte Beratung und Antragsunterstützung für Arbeitserlaubnis und
+                                        Arbeitsvisumanträge im Ausland.</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="card-header">
+                                        <div class="icon"><i class="fa-solid fa-globe"></i></div>
+                                        <h4>Einbürgerungsanträge</h4>
+                                    </div>
+                                    <p>Umfassende rechtliche Beratung zu Einbürgerungsantragsprozessen, erforderlichen
+                                        Bedingungen und Dokumenten.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <div id="contact" class="section-wrapper">
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title">Kontakt</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Istanbul, Türkei</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+90 555 123 45 67</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>info@hukukburosu.com</span>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Ihr Name" required>
+                        <input type="email" placeholder="Ihre E-Mail" required>
+                        <textarea rows="5" placeholder="Ihre Nachricht" required></textarea>
+                        <button type="submit" class="btn btn-primary">Senden</button>
+                    </form>
+                </div>
+            </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 Anwaltskanzlei. <span>Alle Rechte vorbehalten.</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
